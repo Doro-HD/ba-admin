@@ -2,7 +2,7 @@
 ba-admin er et internt system lavet til bilabonnement A/S
 
 # Host projektet
-Er kan hoste dette projekt såfremt det ønskes, krav og opsættelse er beskrevet nedenunder.
+Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er beskrevet nedenunder.
 
 ## Krav
 - Et sted hvor programmet kan hostes, f.eks. Heroku.
