@@ -1,6 +1,6 @@
 * Roadmap
 ** DataRegistration [ ]
-    - [X] oprette lejeaftale
+    -[X] oprette lejeaftale
 ** Skade og udbedring [ ]
     - [-] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden
 ** BusinessEngineering [ ]
