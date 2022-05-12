@@ -67,6 +67,32 @@ public class DamageReportRepository {
 
         return dmReport;
     }
+    public DamageReport findDamageReportById(int carNumber){
+        DamageReport dmReport = new DamageReport();
+        Statement statement = this.jdbcConnector.getStatement();
+        try {
+            ResultSet damageReportResultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
+            while (damageReportResultSet.next()) {
+                dmReport.setId(damageReportResultSet.getInt("id"));
+                dmReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
+                dmReport.setCarNumber(damageReportResultSet.getInt("car_id"));
+            }
+
+            ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
+            while (damagesResultSet.next()) {
+                Damage damage = new Damage();
+                damage.setDamageType(damagesResultSet.getString("damage_type"));
+                damage.setPrice(damagesResultSet.getDouble("price"));
+
+                dmReport.addDamage(damage);
+            }
+        } catch (SQLException e) {
+            dmReport = null;
+            e.printStackTrace();
+        }
+
+        return dmReport;
+    }
 
     //David
     public boolean addDamageToDamageReport(int damageReportId , Damage damage){
