@@ -47,7 +47,7 @@ public class DamageReportRepository {
         DamageReport dmReport = new DamageReport();
         Statement statement = this.jdbcConnector.getStatement();
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_id = " + carNumber);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
             while (resultSet.next()) {
                 dmReport.setId(resultSet.getInt("id"));
                 dmReport.setTotalCost(resultSet.getDouble("total_cost"));
@@ -62,7 +62,8 @@ public class DamageReportRepository {
                 dmReport.addDamage(damage);
             }
         } catch (SQLException e) {
-           e.printStackTrace();
+            dmReport = null;
+            e.printStackTrace();
         }
 
         return dmReport;
