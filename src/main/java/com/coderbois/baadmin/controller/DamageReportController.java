@@ -1,5 +1,8 @@
 package com.coderbois.baadmin.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 //David
 public class DamageReportController {
 
@@ -9,8 +12,9 @@ public class DamageReportController {
     }
 
     //David
+    @GetMapping("/createDamageReport")
     public String createDamageReportGet() {
-        return "";
+        return "createDamageReport";
     }
 
     //David
@@ -19,8 +23,10 @@ public class DamageReportController {
     }
 
     //David
-    public String damageReportGet() {
-        return "";
+    @GetMapping("/damageReport/{id}")
+    public String damageReportGet(@PathVariable("id") int id) {
+
+        return "damageReport";
     }
 
     //David

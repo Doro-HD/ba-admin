@@ -30,6 +30,11 @@ public class DamageReportService {
     }
 
     //Troels
+    public DamageReport findDamageReportById(int id) {
+        return this.damageReportRepository.findDamageReportById(id);
+    }
+
+    //Troels
     public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         return this.damageReportRepository.addDamageToDamageReport(damageReportId, damage);
     }
