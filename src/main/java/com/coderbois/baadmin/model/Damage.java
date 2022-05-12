@@ -1,5 +1,6 @@
 package com.coderbois.baadmin.model;
 
+//Troels oprettet klassen og tilføjet constructor, attributter og getter og setter
 public class Damage {
 
     private String damageType;
