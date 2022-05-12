@@ -32,8 +32,10 @@ public class CarRepository {
                         else if (carStateInt == 2){
                               carState = CarState.LEASED;
                         }
-                        else {
+                        else if (carStateInt == 3) {
                               carState = CarState.DAMAGED;
+                        } else{
+                              carState = CarState.CHECKUP;
                         }
                         allCars.add(new Car(id, chassisNumber, carState));
                   }
