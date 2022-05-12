@@ -20,8 +20,8 @@ public class DamageReportService {
     }
 
     //Troels
-    public boolean createDamageReport(int carNumber) {
-        return this.damageReportRepository.createDamageReport(carNumber);
+    public boolean createDamageReport(DamageReport damageReport) {
+        return this.damageReportRepository.createDamageReport(damageReport);
     }
 
     //Troels
