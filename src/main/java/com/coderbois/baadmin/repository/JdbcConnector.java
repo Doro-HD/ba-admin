@@ -2,8 +2,10 @@ package com.coderbois.baadmin.repository;
 
 import java.sql.*;
 
-public class JdbcConnector {
 
+
+public class JdbcConnector {
+    //HELE KLASSEN ER COPY PASTED FRA MINI (PRUT)PROJEEEEEEKT
     private Connection connection;
 
 
