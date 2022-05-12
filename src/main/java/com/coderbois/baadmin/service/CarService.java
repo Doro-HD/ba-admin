@@ -28,9 +28,15 @@ public class CarService {
       public ArrayList<Car> getAvailableCars(){
             ArrayList<Car> cars = this.carRepository.getAllCars();
             cars.removeIf(car -> car.getCarState() != CarState.AVAILABLE);
+
             return cars;
+      }
+      //Troels & David
+      public ArrayList<Car> getCheckUpCars(){
+            ArrayList<Car> cars = this.carRepository.getAllCars();
+            cars.removeIf(car -> car.getCarState() != CarState.CHECKUP);
 
-
+            return cars;
       }
 
 
