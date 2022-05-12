@@ -9,9 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-//Klasse oprettet af Troels.
-//Tilføjet createDamageReport, findDamageReportByCarNumber, addDamageToDamageReport
-
 //David
 //Troels
 @Repository
@@ -42,7 +39,7 @@ public class DamageReportRepository {
 
         return wasCreated;
     }
-
+    //David
     public DamageReport findDamageReportByCarNumber(int carNumber){
         DamageReport dmReport = new DamageReport();
         Statement statement = this.jdbcConnector.getStatement();
