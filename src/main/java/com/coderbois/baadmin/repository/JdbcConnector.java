@@ -2,6 +2,7 @@ package com.coderbois.baadmin.repository;
 
 import java.sql.*;
 
+//Klassen er taget fra miniprojekt: oenskebroenen
 public class JdbcConnector {
 
     private Connection connection;
@@ -14,9 +15,6 @@ public class JdbcConnector {
 
         try {
             this.connection = DriverManager.getConnection(url, userName, password);
-
-            Statement statement = this.connection.createStatement();
-            statement.executeQuery("/* ping */ SELECT 1");
 
         } catch (SQLException e) {
             System.out.println("Forbindelse fejlede");
