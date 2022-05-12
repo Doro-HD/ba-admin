@@ -1,32 +1,36 @@
 package com.coderbois.baadmin.service;
 
+import com.coderbois.baadmin.model.Damage;
 import com.coderbois.baadmin.model.DamageReport;
 import com.coderbois.baadmin.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //David
+//Troels
 @Service
 public class DamageReportService {
 
     private DamageReportRepository damageReportRepository;
 
+    //David
     @Autowired
     public DamageReportService(DamageReportRepository damageReportRepository) {
         this.damageReportRepository = damageReportRepository;
     }
-    //David
-    public boolean createDamageReport() {
 
+    //Troels
+    public boolean createDamageReport(int carNumber) {
+        return this.damageReportRepository.createDamageReport(carNumber);
     }
 
-    //David
-    public DamageReport findDamageReportByCarNumber() {
-
+    //Troels
+    public DamageReport findDamageReportByCarNumber(int carNumber) {
+        return this.damageReportRepository.findDamageReportByCarNumber(carNumber);
     }
 
-    //David
-    public boolean addDamageToDamageReport() {
-
+    //Troels
+    public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
+        return this.damageReportRepository.addDamageToDamageReport(damageReportId, damage);
     }
 }
