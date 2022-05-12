@@ -18,12 +18,29 @@ import java.sql.Statement;
 public class DamageReportRepository {
 
     private JdbcConnector jdbcConnector;
+
+    //David
     public DamageReportRepository() {
         this.jdbcConnector = new JdbcConnector();
     }
 
-    public boolean createDamageReport(){
-        return false;
+    //Troels
+    public boolean createDamageReport(int carNumber){
+        boolean wasCreated = false;
+        String SQL = "INSERT INTO damagereports (total_cost, car_id) VALUES (?,?)";
+        PreparedStatement statement =jdbcConnector.getPreparedStatement(SQL);
+        if(statement != null){
+            try{
+                statement.setDouble(1, 0);
+                statement.setInt(2, carNumber);
+                statement.executeUpdate();
+                wasCreated = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return wasCreated;
     }
 
     public DamageReport findDamageReportByCarNumber(int carNumber){
