@@ -14,11 +14,11 @@ public class CarService {
       private final CarRepository carRepository;
 
       @Autowired
-      public CarService(CarRepository carRepository){
+      public CarService(CarRepository carRepository){ // af Lasse
             this.carRepository = carRepository;
       }
 
-      public ArrayList<Car> getAllCars(){
+      public ArrayList<Car> getAllCars(){ // af Lasse
             return carRepository.getAllCars();
       }
 

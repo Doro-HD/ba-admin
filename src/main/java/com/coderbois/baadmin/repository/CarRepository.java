@@ -12,17 +12,17 @@ public class CarRepository {
 
       private final JdbcConnector jdbcConnector;
 
-      public CarRepository (){
+      public CarRepository (){ // af Lasse
             this.jdbcConnector = new JdbcConnector();
       }
 
-      public ArrayList<Car> getAllCars (){
+      public ArrayList<Car> getAllCars (){ // af Lasse
             ArrayList<Car> allCars = new ArrayList<>();
             try{
                   String sql = "SELECT * FROM cars";
                   ResultSet resultSet = this.jdbcConnector.getStatement().executeQuery(sql);
                   while(resultSet.next()){
-                        int id = resultSet.getInt("id");
+                        int id = resultSet.getInt("car_number");
                         String chassisNumber = resultSet.getString("chassis_number");
                         int carStateInt = resultSet.getInt("car_state");
                         CarState carState;
