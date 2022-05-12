@@ -4,16 +4,16 @@ package com.coderbois.baadmin.model;
 public class Damage {
 
     private String damageType;
-    private int price;
+    private double price;
 
     public Damage() {
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

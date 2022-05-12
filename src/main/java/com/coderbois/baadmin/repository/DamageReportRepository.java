@@ -5,7 +5,9 @@ import com.coderbois.baadmin.model.DamageReport;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 //Klasse oprettet af Troels.
 //Tilføjet createDamageReport, findDamageReportByCarNumber, addDamageToDamageReport
@@ -24,22 +26,43 @@ public class DamageReportRepository {
         return false;
     }
 
-    public DamageReport findDamageReportByCarNumber(int number){
+    public DamageReport findDamageReportByCarNumber(int carNumber){
         DamageReport dmReport = new DamageReport();
+        Statement statement = this.jdbcConnector.getStatement();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_id = " + carNumber);
+            while (resultSet.next()) {
+                dmReport.setId(resultSet.getInt("id"));
+                dmReport.setTotalCost(resultSet.getDouble("total_cost"));
+                dmReport.setCarNumber(resultSet.getInt("car_id"));
+            }
+            ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
+            while (damagesResultSet.next()) {
+                Damage damage = new Damage();
+                damage.setDamageType(damagesResultSet.getString("damage_type"));
+                damage.setPrice(damagesResultSet.getDouble("price"));
+
+                dmReport.addDamage(damage);
+            }
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
 
         return dmReport;
     }
 
     //David
-    public boolean addDamageToDamageReport(int DamageReportId , Damage damage){
+    public boolean addDamageToDamageReport(int damageReportId , Damage damage){
         boolean wasDamageAdded = false;
-        String sql = "UPDATE damages SET damage_type = ?, price = ?";
+
+        String sql = "UPDATE damages SET damage_type = ?, price = ? WHERE id = ?";
         PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement(sql);
 
         if (preparedStatement != null) {
             try {
                 preparedStatement.setString(1, damage.getDamageType());
                 preparedStatement.setDouble(2, damage.getPrice());
+                preparedStatement.setInt(3, damageReportId);
 
                 preparedStatement.executeUpdate();
                 wasDamageAdded = true;
