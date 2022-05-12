@@ -51,6 +51,7 @@ public class DamageReportRepository {
                 dmReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
                 dmReport.setCarNumber(damageReportResultSet.getInt("car_id"));
             }
+
             ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
             while (damagesResultSet.next()) {
                 Damage damage = new Damage();
