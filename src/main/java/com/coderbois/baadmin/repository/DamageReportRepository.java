@@ -43,15 +43,16 @@ public class DamageReportRepository {
         return wasCreated;
     }
 
+    //David
     public DamageReport findDamageReportByCarNumber(int carNumber){
         DamageReport dmReport = new DamageReport();
         Statement statement = this.jdbcConnector.getStatement();
         try {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
-            while (resultSet.next()) {
-                dmReport.setId(resultSet.getInt("id"));
-                dmReport.setTotalCost(resultSet.getDouble("total_cost"));
-                dmReport.setCarNumber(resultSet.getInt("car_id"));
+            ResultSet damageReportResultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
+            while (damageReportResultSet.next()) {
+                dmReport.setId(damageReportResultSet.getInt("id"));
+                dmReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
+                dmReport.setCarNumber(damageReportResultSet.getInt("car_id"));
             }
             ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
             while (damagesResultSet.next()) {
