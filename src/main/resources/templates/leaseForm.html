@@ -19,8 +19,8 @@
         <br>
 
         <label class="form-label mt-10">Vælg Bil</label>
-        <select>
-            <option th:each="car : ${cars}" th:text="${car.carId}"></option>
+        <select th:field="*{carNumber}">
+            <option th:value="${car.carId}" th:each="car : ${cars}" th:text="${car.carId}"></option>
         </select>
 
         <br>
