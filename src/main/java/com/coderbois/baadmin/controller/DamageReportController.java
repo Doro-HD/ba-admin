@@ -39,14 +39,15 @@ public class DamageReportController {
         return "createDamageReport";
     }
 
-    //David
+    //Troels
     @PostMapping("/createDamageReport")
     public String createDamageReportPost(@ModelAttribute DamageReport damageReport) {
-        System.out.println(damageReport.getCarNumber());
         this.damageReportService.createDamageReport(damageReport);
+
         return "redirect:/createDamageReport";
     }
 
+    //David
     //Troels
     @GetMapping("/damageReport/{id}")
     public String damageReportGet(@PathVariable("id") int id, Model model) {
@@ -59,7 +60,10 @@ public class DamageReportController {
     }
 
     //David
-    public String createDamagePost() {
-        return "";
+    @PostMapping("/damageReport/{id}")
+    public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage) {
+        this.damageReportService.addDamageToDamageReport(id, damage);
+
+        return "redirect:/damageReport/" + id;
     }
 }
