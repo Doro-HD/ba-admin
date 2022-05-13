@@ -12,6 +12,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    //Troels
     public User findUserByUsername(String username){
         return this.userRepository.findUserByUsername(username);
     }

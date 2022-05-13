@@ -21,7 +21,6 @@ public class UserRepository {
 
     }
 
-    //Troels
     public User findUserByUsername(String username){
         final String SQL = "SELECT * FROM users WHERE username = '" + username + "'";
         Statement statement = jdbcConnector.getStatement();
