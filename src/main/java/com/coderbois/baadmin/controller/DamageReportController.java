@@ -51,6 +51,7 @@ public class DamageReportController {
     @GetMapping("/damageReport/{id}")
     public String damageReportGet(@PathVariable("id") int id, Model model) {
         DamageReport damageReport = this.damageReportService.findDamageReportById(id);
+
         model.addAttribute("damageReport", damageReport);
         model.addAttribute("damage", new Damage());
 

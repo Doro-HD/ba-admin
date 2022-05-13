@@ -24,17 +24,17 @@ public class DamageReportRepository {
     }
 
     //Troels
-    public boolean createDamageReport(DamageReport damageReport){
+    public boolean createDamageReport(DamageReport damageReport) {
         boolean wasCreated = false;
         String SQL = "INSERT INTO damagereports (total_cost, car_id) VALUES (?,?)";
-        PreparedStatement statement =jdbcConnector.getPreparedStatement(SQL);
-        if(statement != null){
-            try{
+        PreparedStatement statement = jdbcConnector.getPreparedStatement(SQL);
+        if (statement != null) {
+            try {
                 statement.setDouble(1, 0);
                 statement.setInt(2, damageReport.getCarNumber());
                 statement.executeUpdate();
                 wasCreated = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -42,64 +42,75 @@ public class DamageReportRepository {
         return wasCreated;
     }
 
-   //David
-    public DamageReport findDamageReportByCarNumber(int carNumber){
-        DamageReport dmReport = new DamageReport();
+    //David
+    //Troels
+    private ArrayList<DamageReport> getAllDamageReports(String sql) {
+        ArrayList<DamageReport> damageReports = new ArrayList<>();
+
         Statement statement = this.jdbcConnector.getStatement();
-        try {
-            ResultSet damageReportResultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
-            while (damageReportResultSet.next()) {
-                dmReport.setId(damageReportResultSet.getInt("id"));
-                dmReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
-                dmReport.setCarNumber(damageReportResultSet.getInt("car_id"));
+        if (statement != null) {
+            try {
+                ResultSet damageReportResultSet = statement.executeQuery(sql);
+                while (damageReportResultSet.next()) {
+                    DamageReport damageReport = new DamageReport();
+
+                    damageReport.setId(damageReportResultSet.getInt("id"));
+                    damageReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
+                    damageReport.setCarNumber(damageReportResultSet.getInt("car_id"));
+
+                    ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + damageReport.getId());
+                    while (damagesResultSet.next()) {
+                        Damage damage = new Damage();
+                        damage.setDamageType(damagesResultSet.getString("damage_type"));
+                        damage.setPrice(damagesResultSet.getDouble("price"));
+
+                        damageReport.addDamage(damage);
+                    }
+
+                    damageReports.add(damageReport);
+                }
+            } catch (SQLException e) {
+                damageReports = null;
+                e.printStackTrace();
             }
 
-            ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
-            while (damagesResultSet.next()) {
-                Damage damage = new Damage();
-                damage.setDamageType(damagesResultSet.getString("damage_type"));
-                damage.setPrice(damagesResultSet.getDouble("price"));
-
-                dmReport.addDamage(damage);
-            }
-        } catch (SQLException e) {
-            dmReport = null;
-            e.printStackTrace();
+        } else {
+            damageReports = null;
         }
 
-        return dmReport;
+        return damageReports;
     }
 
     //David
-    public DamageReport findDamageReportById(int id){
-        DamageReport dmReport = new DamageReport();
-        Statement statement = this.jdbcConnector.getStatement();
-        try {
-            ResultSet damageReportResultSet = statement.executeQuery("SELECT * FROM damage_reports WHERE car_number = " + id);
-            while (damageReportResultSet.next()) {
-                dmReport.setId(damageReportResultSet.getInt("id"));
-                dmReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
-                dmReport.setCarNumber(damageReportResultSet.getInt("car_id"));
-            }
+    public DamageReport findDamageReportByCarNumber(int carNumber) {
+        DamageReport damageReport;
+        ArrayList<DamageReport> damageReports = this.getAllDamageReports("SELECT * FROM damage_reports WHERE car_number = " + carNumber);
 
-            ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + dmReport.getId());
-            while (damagesResultSet.next()) {
-                Damage damage = new Damage();
-                damage.setDamageType(damagesResultSet.getString("damage_type"));
-                damage.setPrice(damagesResultSet.getDouble("price"));
-
-                dmReport.addDamage(damage);
-            }
-        } catch (SQLException e) {
-            dmReport = null;
-            e.printStackTrace();
+        if (damageReports == null || damageReports.size() < 1) {
+            damageReport = null;
+        } else {
+            damageReport = damageReports.get(0);
         }
 
-        return dmReport;
+        return damageReport;
     }
 
     //David
-    public boolean addDamageToDamageReport(int damageReportId , Damage damage){
+    public DamageReport findDamageReportById(int id) {
+        DamageReport damageReport;
+        ArrayList<DamageReport> damageReports = this.getAllDamageReports("SELECT * FROM damage_reports WHERE id = " + id);
+
+        if (damageReports == null || damageReports.size() < 1) {
+            damageReport = null;
+        } else {
+            damageReport = damageReports.get(0);
+        }
+
+        return damageReport;
+    }
+
+    //David
+    public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         boolean wasDamageAdded = false;
 
         String sql = "UPDATE damages SET damage_type = ?, price = ? WHERE id = ?";
