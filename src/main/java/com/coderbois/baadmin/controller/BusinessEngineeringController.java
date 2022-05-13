@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class BussinessEngineringController {
+public class BusinessEngineeringController {
 
 
-    @GetMapping("/busstats")
+    @GetMapping("/busistats")
     public String getBusinessStatistic(){
 
-        return "businessstats";
+        return "businessStats";
     }
 
 
