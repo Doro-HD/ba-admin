@@ -12,6 +12,13 @@ public class Lease {
 
     }
 
+    public Lease(String leaseName, double monthlyPay, int carNumber){
+        this.leaseName = leaseName;
+        this. monthlyPay = monthlyPay;
+        this.carNumber = carNumber;
+    }
+
+
     public Lease(int id, String leaseName, double monthlyPay, int carNumber){
         this.id = id;
         this.leaseName = leaseName;
