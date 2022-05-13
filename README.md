@@ -20,8 +20,9 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 
 # Roadmap
 ## DataRegistration 
-- [ ] oprette lejeaftale
+- [X] Oprette lejeaftale.
 ## Skade og udbedring 
-- [ ] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden
+- [X] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden.
+- [ ] UX til at se hvilke skades reporter brugeren har oprettet.
 ## BusinessEngineering 
 - [ ] se hvor mange biler der er lejet ud samt samlet pris

@@ -26,7 +26,7 @@ public class DamageReportRepository {
     //Troels
     public boolean createDamageReport(DamageReport damageReport) {
         boolean wasCreated = false;
-        String SQL = "INSERT INTO damagereports (total_cost, car_id) VALUES (?,?)";
+        String SQL = "INSERT INTO damage_reports (total_cost, car_number) VALUES (?,?)";
         PreparedStatement statement = jdbcConnector.getPreparedStatement(SQL);
         if (statement != null) {
             try {
@@ -34,7 +34,7 @@ public class DamageReportRepository {
                 statement.setInt(2, damageReport.getCarNumber());
                 statement.executeUpdate();
                 wasCreated = true;
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -47,18 +47,19 @@ public class DamageReportRepository {
     private ArrayList<DamageReport> getAllDamageReports(String sql) {
         ArrayList<DamageReport> damageReports = new ArrayList<>();
 
-        Statement statement = this.jdbcConnector.getStatement();
-        if (statement != null) {
+        Statement damageReportStatement = this.jdbcConnector.getStatement();
+        Statement damageStatement = this.jdbcConnector.getStatement();
+        if (damageReportStatement != null && damageStatement != null) {
             try {
-                ResultSet damageReportResultSet = statement.executeQuery(sql);
+                ResultSet damageReportResultSet = damageReportStatement.executeQuery(sql);
                 while (damageReportResultSet.next()) {
                     DamageReport damageReport = new DamageReport();
 
                     damageReport.setId(damageReportResultSet.getInt("id"));
                     damageReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
-                    damageReport.setCarNumber(damageReportResultSet.getInt("car_id"));
+                    damageReport.setCarNumber(damageReportResultSet.getInt("car_number"));
 
-                    ResultSet damagesResultSet = statement.executeQuery("SELECT * FROM damages WHERE damagereport_id = " + damageReport.getId());
+                    ResultSet damagesResultSet = damageStatement.executeQuery("SELECT * FROM damages WHERE damage_report_id = " + damageReport.getId());
                     while (damagesResultSet.next()) {
                         Damage damage = new Damage();
                         damage.setDamageType(damagesResultSet.getString("damage_type"));
@@ -113,7 +114,7 @@ public class DamageReportRepository {
     public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         boolean wasDamageAdded = false;
 
-        String sql = "UPDATE damages SET damage_type = ?, price = ? WHERE id = ?";
+        String sql = "INSERT INTO damages (damage_type, price, damage_report_id) VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement(sql);
 
         if (preparedStatement != null) {

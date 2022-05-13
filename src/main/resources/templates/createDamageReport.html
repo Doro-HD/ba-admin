@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lav ny Skades Rapport</title>
-</head>
-<body>
-<form method="post" th:object="${damageReport}" th:action="@{''}">
-    <label>Biler der skal checkes</label>
-    <select th:field="*{carNumber}">
-        <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
-    </select>
-    <button type="submit" value="submit" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
-</form>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Lav ny Skades Rapport</title>
+    </head>
+    <body>
+        <form method="post" th:object="${damageReport}" th:action="@{''}">
+            <label>Biler der skal checkes</label>
+            <select th:field="*{carNumber}">
+                <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
+            </select>
+            <button type="submit" value="submit" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
+        </form>
+    </body>
 </html>
