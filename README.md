@@ -19,9 +19,13 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 - Upload programmet til host sitet
 
 # Roadmap
+## Login
+- [ ] Generere hashed passwords.
+- [X] Validere passwords.
+- [ ] Brugere kan logge ind på det interne system.
 ## DataRegistration 
-- [ ] oprette lejeaftale
+- [ ] oprette lejeaftale.
 ## Skade og udbedring 
-- [ ] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden
+- [ ] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden.
 ## BusinessEngineering 
-- [ ] se hvor mange biler der er lejet ud samt samlet pris
+- [ ] se hvor mange biler der er lejet ud samt samlet pris.
