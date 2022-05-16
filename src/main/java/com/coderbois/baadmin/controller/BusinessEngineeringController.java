@@ -20,7 +20,7 @@ public class BusinessEngineeringController {
 
 
 
-    @GetMapping("/busistats")
+    @GetMapping("/businessStats")
     public String getBusinessStatistic(Model model ){
         model.addAttribute("leasestatistic", this.leaseService.calculateBusinessInfo());
         return "businessStats";
@@ -30,6 +30,7 @@ public class BusinessEngineeringController {
     public String layout(){
         return "websitelayout";
     }
+
 
 
 
