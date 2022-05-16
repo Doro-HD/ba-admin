@@ -26,6 +26,11 @@ public class BusinessEngineeringController {
         return "businessStats";
     }
 
+    @GetMapping("/")
+    public String layout(){
+        return "websitelayout";
+    }
+
 
 
 }
