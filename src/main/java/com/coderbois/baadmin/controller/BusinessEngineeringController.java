@@ -23,7 +23,7 @@ public class BusinessEngineeringController {
     @GetMapping("/businessStats")
     public String getBusinessStatistic(Model model ){
         model.addAttribute("leasestatistic", this.leaseService.calculateBusinessInfo());
-        return "businessStats";
+        return "businessstats";
     }
 
     @GetMapping("/")

@@ -83,6 +83,11 @@ public class DamageReportRepository {
     }
 
     //David
+    public ArrayList<DamageReport> getAllDamageReports() {
+        return this.getAllDamageReports("SELECT * FROM damage_reports");
+    }
+
+    //David
     public DamageReport findDamageReportByCarNumber(int carNumber) {
         DamageReport damageReport;
         ArrayList<DamageReport> damageReports = this.getAllDamageReports("SELECT * FROM damage_reports WHERE car_number = " + carNumber);

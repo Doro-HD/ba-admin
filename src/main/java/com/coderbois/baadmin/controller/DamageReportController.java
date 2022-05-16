@@ -48,6 +48,13 @@ public class DamageReportController {
     }
 
     //David
+    @GetMapping("/damageReports")
+    public String damageReportsGet(Model model) {
+        model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
+        return "damageReports";
+    }
+
+    //David
     //Troels
     @GetMapping("/damageReport/{id}")
     public String damageReportGet(@PathVariable("id") int id, Model model) {
