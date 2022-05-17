@@ -39,7 +39,6 @@ public class DataRegistrationController {
       public String createLease (@ModelAttribute("lease") Lease lease){
             this.leaseService.saveLease(lease);
 
-
             return "redirect:/";
       }
 }
