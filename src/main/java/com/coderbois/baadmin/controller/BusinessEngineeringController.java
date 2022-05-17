@@ -2,8 +2,6 @@ package com.coderbois.baadmin.controller;
 
 
 import com.coderbois.baadmin.service.LeaseService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +26,7 @@ public class BusinessEngineeringController {
 
     @GetMapping("/")
     public String layout(){
-        return "websitelayout";
+        return "index";
     }
 
 
