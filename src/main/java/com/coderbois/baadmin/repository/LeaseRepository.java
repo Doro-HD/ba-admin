@@ -49,8 +49,6 @@ public class LeaseRepository {
 
             preparedStatement.executeUpdate();
 
-
-
         }catch (Exception e){
             e.printStackTrace();
         }

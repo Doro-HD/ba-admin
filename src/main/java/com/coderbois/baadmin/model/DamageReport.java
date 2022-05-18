@@ -17,17 +17,7 @@ public class DamageReport {
 
         return false;
     }
-    public List<Damage> getDamage() {
-        return damage;
-    }
 
-    public void setDamage(List<Damage> damage) {
-        this.damage = damage;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
 
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;

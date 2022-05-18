@@ -1,8 +1,8 @@
 package com.coderbois.baadmin.model;
 
 public class Car { //car model skrevet af Lasse
-      private int carId;
 
+      private int carId;
       private String chassisNumber;
       private CarState carState;
 

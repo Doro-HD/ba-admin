@@ -49,7 +49,7 @@ public class DamageReportController {
 
     //David
     @GetMapping("/damageReports")
-    public String damageReportsGet(Model model) {
+    public String getAllReports(Model model) {
         model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
         return "damageReports";
     }
