@@ -5,16 +5,15 @@ import java.sql.*;
 //Klassen er taget fra miniprojekt: oenskebroenen
 public class JdbcConnector {
 
-    private Connection connection;
+    private static Connection connection;
 
-
-    public JdbcConnector() {
+    static {
         String url = System.getenv("db_url");
         String userName = System.getenv("db_username");
         String password = System.getenv("db_password");
 
         try {
-            this.connection = DriverManager.getConnection(url, userName, password);
+            connection = DriverManager.getConnection(url, userName, password);
 
         } catch (SQLException e) {
             System.out.println("Forbindelse fejlede");
@@ -25,7 +24,7 @@ public class JdbcConnector {
     Statement getStatement() {
         Statement statement;
         try {
-            statement = this.connection.createStatement();
+            statement = connection.createStatement();
         } catch (SQLException e) {
             //Todo: remove the print stack trace below when we move to production
             e.printStackTrace();
@@ -39,7 +38,7 @@ public class JdbcConnector {
         PreparedStatement preparedStatement;
 
         try {
-            preparedStatement = this.connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
         } catch (SQLException e) {
             //Todo: remove the print stack trace below when we move to production
             e.printStackTrace();
