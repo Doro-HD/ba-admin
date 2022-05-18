@@ -6,6 +6,8 @@ import com.coderbois.baadmin.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 //David
 //Troels
 @Service
@@ -17,6 +19,11 @@ public class DamageReportService {
     @Autowired
     public DamageReportService(DamageReportRepository damageReportRepository) {
         this.damageReportRepository = damageReportRepository;
+    }
+
+    //David
+    public ArrayList<DamageReport> getAllDamageReports() {
+        return this.damageReportRepository.getAllDamageReports();
     }
 
     //Troels

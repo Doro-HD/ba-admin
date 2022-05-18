@@ -2,8 +2,6 @@ package com.coderbois.baadmin.controller;
 
 
 import com.coderbois.baadmin.service.LeaseService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +18,17 @@ public class BusinessEngineeringController {
 
 
 
-    @GetMapping("/busistats")
+    @GetMapping("/businessStats")
     public String getBusinessStatistic(Model model ){
         model.addAttribute("leasestatistic", this.leaseService.calculateBusinessInfo());
         return "businessStats";
     }
+
+    @GetMapping("/")
+    public String layout(){
+        return "index";
+    }
+
 
 
 
