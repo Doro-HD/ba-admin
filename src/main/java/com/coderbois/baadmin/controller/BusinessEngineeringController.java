@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 @Controller
 public class BusinessEngineeringController {
     private final LeaseService leaseService;
