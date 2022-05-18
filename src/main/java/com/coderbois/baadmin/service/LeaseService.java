@@ -36,16 +36,6 @@ public class LeaseService {
         return (new LeasingStatistic(allLeases, allAmount, countLease));
     }
 
-    @Test
-    public void calculateBusinessInformationBasedOnLeases(){
-        ArrayList<Lease> allLeases = new LeaseRepository().getAllLeases();
-        double allAmount = 0;
-        for (Lease lease: allLeases){
-            allAmount = allAmount + lease.getMonthlyPay();
-        }
-        int countLease = allLeases.size();
-        assertNotNull(new LeasingStatistic(allLeases, allAmount, countLease));
-    }
     }
 
 

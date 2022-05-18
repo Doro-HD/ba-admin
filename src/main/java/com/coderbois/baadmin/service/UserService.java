@@ -1,4 +1,4 @@
 package com.coderbois.baadmin.service;
 
-public class userService {
+public class UserService {
 }
