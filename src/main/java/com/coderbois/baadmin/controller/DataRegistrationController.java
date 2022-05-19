@@ -36,7 +36,7 @@ public class DataRegistrationController {
 
       //Created by Victor
       @PostMapping("/leaseForm")
-      public String createLease (@ModelAttribute("lease") Lease lease){
+      public String createLeasePost (@ModelAttribute("lease") Lease lease){
             this.leaseService.saveLease(lease);
 
             return "redirect:/";

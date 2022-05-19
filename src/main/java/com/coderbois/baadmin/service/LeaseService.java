@@ -2,6 +2,7 @@ package com.coderbois.baadmin.service;
 
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.repository.LeaseRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

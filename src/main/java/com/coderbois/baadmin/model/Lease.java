@@ -26,35 +26,20 @@ public class Lease {
         this.carNumber = carNumber;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getLeaseName() {
         return leaseName;
     }
 
-    public void setLeaseName(String leaseName) {
-        this.leaseName = leaseName;
-    }
+
 
     public double getMonthlyPay() {
         return monthlyPay;
     }
 
-    public void setMonthlyPay(double monthlyPay) {
-        this.monthlyPay = monthlyPay;
-    }
 
     public int getCarNumber() {
         return carNumber;
     }
 
-    public void setCarNumber(int carNumber) {
-        this.carNumber = carNumber;
-    }
 }

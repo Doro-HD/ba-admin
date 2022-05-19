@@ -23,7 +23,7 @@ public class BusinessEngineeringController {
     }
 
     @GetMapping("/")
-    public String layout(){
+    public String homePageGet(){
         return "index";
     }
 
