@@ -6,6 +6,7 @@ import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,5 +41,13 @@ class DamageReportRepositoryTest {
         boolean damageWasSaved = damageReportRepository.addDamageToDamageReport(1, damage);
 
         assertTrue(damageWasSaved);
+    }
+
+    @Test
+    void findDamageReportPastWarningDate() {
+        DamageReportRepository damageReportRepository = new DamageReportRepository();
+        ArrayList<DamageReport> damageReports = damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
+
+        assertFalse(damageReports.isEmpty());
     }
 }

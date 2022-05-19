@@ -6,6 +6,7 @@ import com.coderbois.baadmin.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,5 +52,10 @@ public class DamageReportService {
     //Troels
     public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         return this.damageReportRepository.addDamageToDamageReport(damageReportId, damage);
+    }
+
+    //David
+    public ArrayList<DamageReport> findDamageReportPastWarningDate() {
+        return this.damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
     }
 }

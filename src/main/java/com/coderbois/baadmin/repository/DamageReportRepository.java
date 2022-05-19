@@ -8,7 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //David
@@ -59,6 +62,9 @@ public class DamageReportRepository {
                     damageReport.setId(damageReportResultSet.getInt("id"));
                     damageReport.setTotalCost(damageReportResultSet.getDouble("total_cost"));
                     damageReport.setCarNumber(damageReportResultSet.getInt("car_number"));
+
+                    String date = damageReportResultSet.getString("warning_date");
+                    damageReport.setWarningDate(LocalDate.parse(date));
 
                     ResultSet damagesResultSet = damageStatement.executeQuery("SELECT * FROM damages WHERE damage_report_id = " + damageReport.getId());
                     while (damagesResultSet.next()) {
@@ -114,6 +120,11 @@ public class DamageReportRepository {
         }
 
         return damageReport;
+    }
+
+    //David
+    public ArrayList<DamageReport> findDamageReportPastWarningDate(String date) {
+        return this.getAllDamageReports("SELECT * FROM damage_reports WHERE warning_date > " + date);
     }
 
     //David

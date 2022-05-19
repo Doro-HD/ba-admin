@@ -76,8 +76,8 @@ public class DamageReportController {
 
     //Troels
     @GetMapping("/damageReportsPastWarningDate")
-    public String damageReportsPastWarningDate(){
-
+    public String damageReportsPastWarningDate(Model model){
+        model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
 
         return "damageReportsPastWarningDate";
     }
