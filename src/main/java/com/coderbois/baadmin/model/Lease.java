@@ -8,6 +8,8 @@ public class Lease {
     private double monthlyPay;
     private int carNumber;
 
+    private String localDate;
+
     public Lease(){
 
     }
@@ -19,11 +21,12 @@ public class Lease {
     }
 
 
-    public Lease(int id, String leaseName, double monthlyPay, int carNumber){
+    public Lease(int id, String leaseName, double monthlyPay, int carNumber, String localDate){
         this.id = id;
         this.leaseName = leaseName;
         this. monthlyPay = monthlyPay;
         this.carNumber = carNumber;
+        this.localDate = localDate;
     }
 
 
@@ -40,6 +43,14 @@ public class Lease {
 
     public int getCarNumber() {
         return carNumber;
+    }
+
+    public String getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(String localDate) {
+        this.localDate = localDate;
     }
 
 }

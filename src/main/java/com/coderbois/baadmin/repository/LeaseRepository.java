@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Repository
@@ -28,7 +29,8 @@ public class LeaseRepository {
                 String leaseName = resultset.getString("lease_name");
                 double monthlyPay = resultset.getDouble("monthly_payment");
                 int carNumber = resultset.getInt("car_number");
-                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber));
+                String localDate = resultset.getString("lease_duration");
+                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
             }
         }catch (Exception e){
             System.out.println("something went wrong in getAllLeases");

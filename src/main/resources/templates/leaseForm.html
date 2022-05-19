@@ -10,7 +10,7 @@
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/weblayout" >
-    <link th:href="@{/leaseformcss.css}" rel="stylesheet">
+    <link th:href="@{/leaseformcss.css}" href="/static/leaseformcss.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 
 <div class="contractform" style="display: inline-block;">
     <form th:object="${lease}" method="post" , th:action="@{/leaseForm}">
-        <label class="form-label mt-10">Lease Navn</label>
+        <label class="form-label mt-10">Kunde Navn</label>
         <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
 
         <br>
@@ -36,8 +36,8 @@
 
         <br>
 
-        <label class="form-label mt-10">Lejeaftalens Varighed</label>
-        <input type="text" name="leaseDuration" class="form-control">
+        <label class="form-label mt-10">Varighed/Måned</label>
+        <input type="text" th:field="*{amountOfMonths}" name="leaseDuration" class="form-control">
 
         <button type="submit" value="submit" class="btn btn-outline-primary mt-3 mb-3">Opret Leasing Aftale</button>
     </form>
