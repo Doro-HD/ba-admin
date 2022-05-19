@@ -73,4 +73,12 @@ public class DamageReportController {
 
         return "redirect:/damageReport/" + id;
     }
+
+    //Troels
+    @GetMapping("/damageReportsPastWarningDate")
+    public String damageReportsPastWarningDate(){
+
+
+        return "damageReportsPastWarningDate";
+    }
 }
