@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Lease Form</title>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="contractform" style="display: inline-block;">
-    <form th:object="${lease}" method="post" , th:action="@{/leaseForm}">
+    <form th:object="${lease}" method="post" th:action="@{/leaseForm}">
         <label class="form-label mt-10">Kunde Navn</label>
         <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
 

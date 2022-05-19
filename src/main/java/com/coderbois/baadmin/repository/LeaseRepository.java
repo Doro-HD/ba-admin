@@ -45,6 +45,7 @@ public class LeaseRepository {
     public void saveLease(Lease lease){
         try {
             PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, lease_duration) VALUES (?, ?, ?, ?)");
+            System.out.println(lease.getLeaseName());
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
             preparedStatement.setInt(3, lease.getCarNumber());

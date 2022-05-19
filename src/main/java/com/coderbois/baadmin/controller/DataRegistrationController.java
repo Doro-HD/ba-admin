@@ -38,7 +38,10 @@ public class DataRegistrationController {
 
       //Created by Victor
       @PostMapping("/leaseForm")
-      public String createLeasePost (@ModelAttribute("lease") Lease lease){
+      public String createLeasePost (@ModelAttribute Lease lease){
+            System.out.println(lease.getLeaseName());
+            System.out.println(lease.getMonthlyPay());
+            System.out.println(lease.getAmountOfMonths());
             this.leaseService.saveLease(lease);
 
             return "redirect:/";
