@@ -32,7 +32,7 @@ public class DamageReportRepository {
             try {
                 statement.setDouble(1, 0);
                 statement.setInt(2, damageReport.getCarNumber());
-                statement.setString(3, damageReport.getWarningDate());
+                statement.setString(3, damageReport.getWarningDateAsString());
                 statement.executeUpdate();
                 wasCreated = true;
             } catch (SQLException e) {

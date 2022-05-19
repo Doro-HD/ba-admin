@@ -1,6 +1,7 @@
 package com.coderbois.baadmin.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 //Troels oprettet klassen og tilføjet constructor og attributter
@@ -10,6 +11,7 @@ public class DamageReport {
     private List<Damage> damage;
     private double totalCost;
     private int carNumber;
+
     private LocalDate warningDate;
 
     public DamageReport(){}
@@ -19,10 +21,16 @@ public class DamageReport {
 
         return false;
     }
+
+    public String getWarningDateAsString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        return this.warningDate.format(dateTimeFormatter);
+    }
+
     public List<Damage> getDamage() {
         return damage;
     }
-
     public void setDamage(List<Damage> damage) {
         this.damage = damage;
     }
@@ -53,5 +61,9 @@ public class DamageReport {
 
     public String getWarningDate() {
         return warningDate.toString();
+    }
+
+    public void setWarningDate(LocalDate warningDate) {
+        this.warningDate = warningDate;
     }
 }
