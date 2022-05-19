@@ -48,7 +48,7 @@ public class LeaseRepository {
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
             preparedStatement.setInt(3, lease.getCarNumber());
-            preparedStatement.setString(3, lease.getStringDate());
+            preparedStatement.setString(4, lease.getStringDate());
 
             preparedStatement.executeUpdate();
 
