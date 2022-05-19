@@ -26,6 +26,7 @@ public class DataRegistrationController {
             this.leaseService = leaseService;
       }
 
+
       //Created by Lasse
       @GetMapping("/leaseForm")
       public String createLease (Model model){
