@@ -17,7 +17,7 @@ public class DamageReport {
     public DamageReport(){}
 
     public void addDamage(Damage damage){
-
+        this.damage.add(damage);
     }
 
     public String getWarningDateAsString() {
