@@ -50,4 +50,8 @@ public class DamageReport {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getWarningDate() {
+        return warningDate.toString();
+    }
 }

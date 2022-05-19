@@ -26,12 +26,13 @@ public class DamageReportRepository {
     //Troels
     public boolean createDamageReport(DamageReport damageReport) {
         boolean wasCreated = false;
-        String SQL = "INSERT INTO damage_reports (total_cost, car_number) VALUES (?,?)";
+        String SQL = "INSERT INTO damage_reports (total_cost, car_number, warning_date) VALUES (?,?,?)";
         PreparedStatement statement = jdbcConnector.getPreparedStatement(SQL);
         if (statement != null) {
             try {
                 statement.setDouble(1, 0);
                 statement.setInt(2, damageReport.getCarNumber());
+                statement.setString(3, damageReport.getWarningDate());
                 statement.executeUpdate();
                 wasCreated = true;
             } catch (SQLException e) {
