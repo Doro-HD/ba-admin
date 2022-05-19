@@ -42,10 +42,11 @@ public class LeaseRepository {
     // Create by Victor
     public void saveLease(Lease lease){
         try {
-            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, lease_duration) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
             preparedStatement.setInt(3, lease.getCarNumber());
+            preparedStatement.setString(3, lease.getStringDate());
 
             preparedStatement.executeUpdate();
 
