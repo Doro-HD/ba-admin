@@ -16,10 +16,8 @@ public class DamageReport {
 
     public DamageReport(){}
 
-    public boolean addDamage(Damage damage){
+    public void addDamage(Damage damage){
 
-
-        return false;
     }
 
     public String getWarningDateAsString() {
