@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>websiteLayout</title>
@@ -18,33 +18,39 @@
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a href="/" class="nav-link active" aria-current="page">
+      <a href="/" class="nav-link" th:classappend="${currentSite} == 'dashBoard' ? active : text-white" aria-current="page">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-        Home
+        Dashboard
       </a>
     </li>
     <li>
-      <a href="/leaseForm" class="nav-link text-white">
+      <a href="/leaseForm" class="nav-link" th:classappend="${currentSite} == 'leaseForm' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-        Lease Form
+        Opret lejeaftale
       </a>
     </li>
     <li>
-      <a href="/businessStats" class="nav-link text-white">
+      <a href="/businessStats" class="nav-link" th:classappend="${currentSite} == 'businessStats' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-        BusinessStats
+        Se udlejede biler
       </a>
     </li>
     <li>
-      <a href="/createDamageReport" class="nav-link text-white">
+      <a href="/createDamageReport" class="nav-link" th:classappend="${currentSite} == 'createDamageReport' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-        Create damage report
+        Opret skades rapport
       </a>
     </li>
     <li>
-      <a href="/damageReport/{id}" class="nav-link text-white">
+      <a href="/allDamageReports" class="nav-link" th:classappend="${currentSite} == 'allDamageReports' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-        See damage report
+        Se alle skades rapporter
+      </a>
+    </li>
+    <li>
+      <a href="/damageReportsPastWarningDate" class="nav-link" th:classappend="${currentSite} == 'damageReportPastWarningDate' ? active : text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+        Se overskredet skades rapporter
       </a>
     </li>
   </ul>

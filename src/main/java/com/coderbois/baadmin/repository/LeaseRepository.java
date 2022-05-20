@@ -29,7 +29,7 @@ public class LeaseRepository {
                 String leaseName = resultset.getString("lease_name");
                 double monthlyPay = resultset.getDouble("monthly_payment");
                 int carNumber = resultset.getInt("car_number");
-                String localDate = resultset.getString("lease_duration");
+                String localDate = resultset.getString("expiration_date");
                 allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
             }
         }catch (Exception e){
