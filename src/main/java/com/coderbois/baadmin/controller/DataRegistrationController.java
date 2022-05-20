@@ -55,4 +55,23 @@ public class DataRegistrationController {
 
             return "redirect:/leaseForm";
       }
+
+      @GetMapping("/oldLease")
+      public String showOldLeases (HttpSession httpSession, Model model) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+            if (cookieUsername != null) {
+                  endpoint = "oldLease";
+
+                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+
+                  model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
+            }
+
+            return endpoint;
+      }
 }

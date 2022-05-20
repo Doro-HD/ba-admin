@@ -1,10 +1,7 @@
 package com.coderbois.baadmin.service;
-
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.repository.LeaseRepository;
-
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,15 +15,13 @@ public class LeaseService {
         this.leaseRepository = leaseRepository;
     }
 
-
-    public void saveLease(Lease lease) {
-        LocalDate myDate = LocalDate.now();
-        LocalDate theDate = myDate.plusMonths(lease.getAmountOfMonths());
-        DateTimeFormatter myFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        lease.setStringDate(theDate.format(myFormater));
-        this.leaseRepository.saveLease(lease);
-    }
-
+      public void saveLease(Lease lease) {
+            LocalDate myDate = LocalDate.now();
+            LocalDate theDate = myDate.plusMonths(lease.getAmountOfMonths());
+            DateTimeFormatter myFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            lease.setStringDate(theDate.format(myFormater));
+            this.leaseRepository.saveLease(lease);
+      }
 
     public LeasingStatistic calculateBusinessInfo() {
         ArrayList<Lease> allLeases = this.leaseRepository.getAllLeases();
