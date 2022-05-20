@@ -18,12 +18,15 @@ public class BusinessEngineeringController {
 
     @GetMapping("/businessStats")
     public String getBusinessStatistic(Model model ){
+        model.addAttribute("currentSite", "businessStats");
         model.addAttribute("leasestatistic", this.leaseService.calculateBusinessInfo());
         return "businessStats";
     }
 
     @GetMapping("/")
-    public String homePageGet(){
+    public String homePageGet(Model model){
+        model.addAttribute("currentSite", "dashBoard");
+
         return "index";
     }
 

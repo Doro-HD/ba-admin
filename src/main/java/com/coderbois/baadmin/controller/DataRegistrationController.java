@@ -33,6 +33,7 @@ public class DataRegistrationController {
       //Created by Lasse
       @GetMapping("/leaseForm")
       public String createLease (Model model){
+            model.addAttribute("currentSite", "leaseForm");
             model.addAttribute("lease", new Lease());
             model.addAttribute("cars", carService.getAvailableCars());
             return "leaseForm";
