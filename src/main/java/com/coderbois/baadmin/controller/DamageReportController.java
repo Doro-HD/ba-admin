@@ -51,7 +51,7 @@ public class DamageReportController {
     @GetMapping("/damageReports")
     public String getAllReports(Model model) {
         model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
-        return "damageReports";
+        return "allDamageReports";
     }
 
     //David
@@ -72,5 +72,13 @@ public class DamageReportController {
         this.damageReportService.addDamageToDamageReport(id, damage);
 
         return "redirect:/damageReport/" + id;
+    }
+
+    //Troels
+    @GetMapping("/damageReportsPastWarningDate")
+    public String damageReportsPastWarningDate(Model model){
+        model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
+
+        return "damageReportsPastWarningDate";
     }
 }

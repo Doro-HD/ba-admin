@@ -46,6 +46,13 @@
                 Se Udlejede Biler
             </a>
         </li>
+        <li>
+            <a href="/damageReportsPastWarningDate" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Overskredet Skadesrapporter
+            </a>
+        </li>
     </ul>
     <hr>
     <div class="dropdown">
@@ -93,6 +100,13 @@
                 Se Udlejede Biler
             </a>
         </li>
+        <li>
+            <a href="/damageReportsPastWarningDate" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Overskredet Skadesrapporter
+            </a>
+        </li>
     </ul>
     <hr>
     <div class="dropdown">
@@ -138,6 +152,67 @@
                 <svg class="bi me-2" width="16" height="16">
                 </svg>
                 Se Udlejede Biler
+            </a>
+        </li>
+        <li>
+            <a href="/damageReportsPastWarningDate" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Overskredet Skadesrapporter
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+           data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://ahmstrafikskole.dk/wp-content/uploads/2019/03/kisspng-computer-icons-avatar-user-login-5ae149b23cef01.9166670115247139062496.png"
+                 alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>Bruger</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="#">Log Ud</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--Sidebar til Overskredet Skadesrapporter-->
+<div th:fragment="sidebarDamageReportsPastWarningDate" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+     style="width: 280px; min-height: 100vh; float: left">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"></use>
+        </svg>
+        <span class="fs-4">BA-Admin</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="/leaseForm" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Opret Lease
+            </a>
+        </li>
+        <li>
+            <a href="/businessStats" class="nav-link text-white">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Se Udlejede Biler
+            </a>
+        </li>
+        <li>
+            <a href="/damageReportsPastWarningDate" class="nav-link active">
+                <svg class="bi me-2" width="16" height="16">
+                </svg>
+                Overskredet Skadesrapporter
             </a>
         </li>
     </ul>
