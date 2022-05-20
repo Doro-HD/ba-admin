@@ -51,7 +51,7 @@ public class DamageReportController {
     //David
     @GetMapping("/allDamageReports")
     public String getAllReports(Model model) {
-        model.addAttribute("currentSite", "damageReports");
+        model.addAttribute("currentSite", "allDamageReports");
         model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
         return "allDamageReports";
     }
