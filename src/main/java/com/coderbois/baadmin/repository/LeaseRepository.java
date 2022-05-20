@@ -29,7 +29,7 @@ public class LeaseRepository {
                 String leaseName = resultset.getString("lease_name");
                 double monthlyPay = resultset.getDouble("monthly_payment");
                 int carNumber = resultset.getInt("car_number");
-                String localDate = resultset.getString("lease_duration");
+                String localDate = resultset.getString("expiration_date");
                 allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
             }
         }catch (Exception e){
@@ -44,7 +44,7 @@ public class LeaseRepository {
     // Create by Victor
     public void saveLease(Lease lease){
         try {
-            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, lease_duration) VALUES (?, ?, ?, ?)");
+            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, expiration_date) VALUES (?, ?, ?, ?)");
             System.out.println(lease.getLeaseName());
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
@@ -56,6 +56,5 @@ public class LeaseRepository {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 }

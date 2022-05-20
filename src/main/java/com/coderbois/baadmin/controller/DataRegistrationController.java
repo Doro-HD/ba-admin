@@ -44,7 +44,7 @@ public class DataRegistrationController {
             System.out.println(lease.getAmountOfMonths());
             this.leaseService.saveLease(lease);
 
-            return "redirect:/";
+            return "leaseForm";
       }
 
 }
