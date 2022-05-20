@@ -27,7 +27,7 @@ public class BusinessEngineeringController {
         return "index";
     }
 
-    public String leaseBySearch(){
+    public String getLeasesThatExpireByDate(){
 
         return "";
     }

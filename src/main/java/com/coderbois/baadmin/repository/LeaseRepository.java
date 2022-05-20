@@ -59,7 +59,7 @@ public class LeaseRepository {
     }
 
     // Create by Troels
-    public ArrayList<Lease> leaseBySearch(String date){
+    public ArrayList<Lease> getLeasesThatExpireByDate(String date){
         ArrayList<Lease> leases = new ArrayList<>();
         String sql = "SELECT * FROM leases WHERE expiration_date = " + date;
         try{
