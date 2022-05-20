@@ -33,6 +33,10 @@ public class LeaseService {
             int countLease = allLeases.size();
             return (new LeasingStatistic(allLeases, allAmount, countLease));
       }
+
+      public ArrayList<Lease> leaseBySearch(){
+
+      }
 }
 
 
