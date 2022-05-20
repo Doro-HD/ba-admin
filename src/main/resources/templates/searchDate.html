@@ -17,12 +17,12 @@
 </div>
 
 <div class="contractform" style="display: inline-block;">
-    <form th:object="${lease}" method="post" th:action="@{/leaseForm}">
-        <label class="form-label mt-10">Kunde Navn</label>
-        <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
-
+    <form th:object="${lease}" method="post" th:action="@{/searchDate}">
+        <label class="form-label mt-10">Indtast dato i format yyyy-mm-d</label>
+        <input type="text" th:field="*{stringDate}" name="createStringDate" class="form-control">
+        <button type="submit" value="submit" class="btn btn-outline-primary mt-3 mb-3">Søg</button>
+    </form>
 </div>
-
 
 </body>
 </html>
