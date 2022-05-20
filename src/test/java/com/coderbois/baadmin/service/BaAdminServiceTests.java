@@ -14,6 +14,7 @@ public class BaAdminServiceTests {
     @Test
     public void calculateBusinessInformationBasedOnLeases(){
         ArrayList<Lease> allLeases = new LeaseRepository().getAllLeases();
+
         double allAmount = 0;
         for (Lease lease: allLeases){
             allAmount = allAmount + lease.getMonthlyPay();
