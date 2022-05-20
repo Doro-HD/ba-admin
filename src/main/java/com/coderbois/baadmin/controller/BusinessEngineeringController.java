@@ -1,6 +1,7 @@
 package com.coderbois.baadmin.controller;
 
 
+import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,19 @@ public class BusinessEngineeringController {
     public String getLeasesThatExpireByDate(){
 
         return "";
+    }
+
+
+    @GetMapping("/searchdate")
+    public String getCarsOnSpecificDate(Model model ){
+        model.addAttribute("lease", new Lease());
+        return "searchDate";
+    }
+
+    @GetMapping("/searchdate")
+    public String postCarsOnSpecificDate(Model model ){
+
+        return "businessStats";
     }
 
 
