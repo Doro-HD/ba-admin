@@ -38,6 +38,18 @@ public class LeaseService {
         return (new LeasingStatistic(allLeases, allAmount, countLease));
     }
 
+
+
+    public ArrayList<Lease> getLeasePastDueDate(){
+        ArrayList<Lease> ourLeases = this.leaseRepository.getAllLeases();
+        ArrayList<Lease> ourOldLeases = new ArrayList<>();
+        for (Lease lease : ourLeases){
+            if (lease.getLeaseDuration().isBefore(LocalDate.now())){
+                ourOldLeases.add(lease);
+            }
+        }
+        return ourOldLeases;
+    }
     }
 
 
