@@ -9,13 +9,16 @@
 
 </head>
 <body>
+
 <div th:replace="sidebarFragments :: sidebar"></div>
 <div style="display: inline-block">
     <table>
         <tr th:each="leases : ${lease}">
-            <td th:text="${lease.leaseDuration}></td>
+            <td th:text="${lease.leaseDuration}"></td>
         </tr>
     </table>
+
 </div>
+
 </body>
 </html>
