@@ -2,22 +2,24 @@ package com.coderbois.baadmin.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.ArrayList;
 
 //Troels oprettet klassen og tilføjet constructor og attributter
 public class DamageReport {
 
     private int id;
-    private List<Damage> damage;
+    private ArrayList<Damage> damages;
     private double totalCost;
     private int carNumber;
 
     private LocalDate warningDate;
 
-    public DamageReport(){}
+    public DamageReport(){
+        this.damages = new ArrayList<>();
+    }
 
     public void addDamage(Damage damage){
-        this.damage.add(damage);
+        this.damages.add(damage);
     }
 
     public String getWarningDateAsString() {
@@ -26,11 +28,11 @@ public class DamageReport {
         return this.warningDate.format(dateTimeFormatter);
     }
 
-    public List<Damage> getDamage() {
-        return damage;
+    public ArrayList<Damage> getDamage() {
+        return damages;
     }
-    public void setDamage(List<Damage> damage) {
-        this.damage = damage;
+    public void setDamage(ArrayList<Damage> damage) {
+        this.damages = damage;
     }
 
     public double getTotalCost() {

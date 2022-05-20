@@ -124,7 +124,7 @@ public class DamageReportRepository {
 
     //David
     public ArrayList<DamageReport> findDamageReportPastWarningDate(String date) {
-        return this.getAllDamageReports("SELECT * FROM damage_reports WHERE warning_date > " + date);
+        return this.getAllDamageReports("SELECT * FROM damage_reports WHERE warning_date <= \"" + date + "\" ORDER BY warning_date ASC");
     }
 
     //David
