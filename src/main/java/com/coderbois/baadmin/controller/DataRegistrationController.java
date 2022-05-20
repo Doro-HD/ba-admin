@@ -55,4 +55,10 @@ public class DataRegistrationController {
             return this.leaseService.getLeasePastDueDate();
       }
 
+      @GetMapping("/oldLease")
+      public String showOldLeases (Model model) {
+            model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
+            return "oldLease";
+      }
+
 }
