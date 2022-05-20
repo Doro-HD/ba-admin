@@ -23,31 +23,31 @@
         Dashboard
       </a>
     </li>
-    <li>
+    <li th:if="${userRole} == 'dataRegistration'">
       <a href="/leaseForm" class="nav-link" th:classappend="${currentSite} == 'leaseForm' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
         Opret lejeaftale
       </a>
     </li>
-    <li>
+    <li th:if="${userRole} == 'businessEnginering'">
       <a href="/businessStats" class="nav-link" th:classappend="${currentSite} == 'businessStats' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
         Se udlejede biler
       </a>
     </li>
-    <li>
+    <li th:if="${userRole} == 'damageReport'">
       <a href="/createDamageReport" class="nav-link" th:classappend="${currentSite} == 'createDamageReport' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
         Opret skades rapport
       </a>
     </li>
-    <li>
+    <li th:if="${userRole} == 'damageReport'">
       <a href="/allDamageReports" class="nav-link" th:classappend="${currentSite} == 'allDamageReports' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
         Se alle skades rapporter
       </a>
     </li>
-    <li>
+    <li th:if="${userRole} == 'damageReport'">
       <a href="/damageReportsPastWarningDate" class="nav-link" th:classappend="${currentSite} == 'damageReportPastWarningDate' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
         Se overskredet skades rapporter
@@ -58,14 +58,10 @@
   <div class="dropdown">
     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-      <strong>mdo</strong>
+      <strong th:text="${username}"></strong>
     </a>
     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-      <li><a class="dropdown-item" href="#">New project...</a></li>
-      <li><a class="dropdown-item" href="#">Settings</a></li>
-      <li><a class="dropdown-item" href="#">Profile</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Sign out</a></li>
+      <li><a class="dropdown-item" th:href="@{/logout}">Log ud</a></li>
     </ul>
   </div>
 </div>

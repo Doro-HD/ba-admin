@@ -21,15 +21,17 @@ public class UserRepository {
 
     }
 
+    //David
     public User findUserByUsername(String username){
         final String SQL = "SELECT * FROM users WHERE username = '" + username + "'";
         Statement statement = jdbcConnector.getStatement();
-        User user = new User();
+        User user = null;
 
         if(statement != null) {
             try {
                 ResultSet userResultSet = statement.executeQuery(SQL);
                 while (userResultSet.next()){
+                    user = new User();
 
                     user.setUsername(userResultSet.getString("username"));
                     user.setPassword(userResultSet.getString("user_password"));
@@ -40,10 +42,7 @@ public class UserRepository {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }else{
-            user = null;
         }
-
 
         return user;
     }
