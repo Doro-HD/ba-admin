@@ -74,7 +74,9 @@ public class LeaseRepository {
                 double monthlyPay = resultSet.getDouble("monthly_payment");
                 int carNumber = resultSet.getInt("car_number");
                 String localDate = resultSet.getString("expiration_date");
-                leases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+                leases.add(new Lease(id, leaseName, monthlyPay, carNumber, LocalDate.parse(localDate, formatter)));
             }
         }catch (SQLException e){
             System.out.println("Something went wrong in leasesBySearch");

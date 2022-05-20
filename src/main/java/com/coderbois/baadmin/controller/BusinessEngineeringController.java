@@ -6,6 +6,8 @@ import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BusinessEngineeringController {
@@ -40,9 +42,10 @@ public class BusinessEngineeringController {
         return "searchDate";
     }
 
-    @GetMapping("/searchdate")
-    public String postCarsOnSpecificDate(Model model ){
-
+    @PostMapping("/searchdate")
+    public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
+        this.leaseService.getLeasesThatExpireByDate(lease);
+        model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
         return "businessStats";
     }
 
