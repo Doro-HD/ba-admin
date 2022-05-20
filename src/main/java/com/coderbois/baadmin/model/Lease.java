@@ -24,12 +24,12 @@ public class Lease {
     }
 
 
-    public Lease(int id, String leaseName, double monthlyPay, int carNumber, String localDate){
+    public Lease(int id, String leaseName, double monthlyPay, int carNumber, LocalDate leaseDuration){
         this.id = id;
         this.leaseName = leaseName;
         this. monthlyPay = monthlyPay;
         this.carNumber = carNumber;
-        this.localDate = localDate;
+        this.leaseDuration = leaseDuration;
     }
 
     public Lease(){
