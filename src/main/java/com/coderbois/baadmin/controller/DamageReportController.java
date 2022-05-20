@@ -33,6 +33,7 @@ public class DamageReportController {
     //David
     @GetMapping("/createDamageReport")
     public String createDamageReportGet(Model model) {
+        model.addAttribute("currentSite", "createDamageReport");
         model.addAttribute("damageReport", new DamageReport());
         model.addAttribute("checkUpCars", this.carService.getCheckUpCars());
 
@@ -48,11 +49,20 @@ public class DamageReportController {
     }
 
     //David
+    @GetMapping("/allDamageReports")
+    public String getAllReports(Model model) {
+        model.addAttribute("currentSite", "allDamageReports");
+        model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
+        return "allDamageReports";
+    }
+
+    //David
     //Troels
     @GetMapping("/damageReport/{id}")
     public String damageReportGet(@PathVariable("id") int id, Model model) {
         DamageReport damageReport = this.damageReportService.findDamageReportById(id);
 
+        model.addAttribute("currentSite", "allDamageReports");
         model.addAttribute("damageReport", damageReport);
         model.addAttribute("damage", new Damage());
 
@@ -61,9 +71,20 @@ public class DamageReportController {
 
     //David
     @PostMapping("/damageReport/{id}")
-    public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage) {
+    public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage, Model model) {
         this.damageReportService.addDamageToDamageReport(id, damage);
 
+        model.addAttribute("currentSite", "damageReport");
+
         return "redirect:/damageReport/" + id;
+    }
+
+    //Troels
+    @GetMapping("/damageReportsPastWarningDate")
+    public String damageReportsPastWarningDate(Model model){
+        model.addAttribute("currentSite", "damageReportPastWarningDate");
+        model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
+
+        return "damageReportsPastWarningDate";
     }
 }
