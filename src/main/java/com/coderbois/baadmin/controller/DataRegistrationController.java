@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Controller
@@ -26,6 +27,7 @@ public class DataRegistrationController {
             this.leaseService = leaseService;
       }
 
+
       //Created by Lasse
       @GetMapping("/leaseForm")
       public String createLease (Model model){
@@ -36,9 +38,13 @@ public class DataRegistrationController {
 
       //Created by Victor
       @PostMapping("/leaseForm")
-      public String createLease (@ModelAttribute("lease") Lease lease){
+      public String createLeasePost (@ModelAttribute Lease lease){
+            System.out.println(lease.getLeaseName());
+            System.out.println(lease.getMonthlyPay());
+            System.out.println(lease.getAmountOfMonths());
             this.leaseService.saveLease(lease);
 
             return "redirect:/";
       }
+
 }

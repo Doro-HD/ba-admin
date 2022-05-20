@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Repository
@@ -28,7 +29,8 @@ public class LeaseRepository {
                 String leaseName = resultset.getString("lease_name");
                 double monthlyPay = resultset.getDouble("monthly_payment");
                 int carNumber = resultset.getInt("car_number");
-                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber));
+                String localDate = resultset.getString("lease_duration");
+                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
             }
         }catch (Exception e){
             System.out.println("something went wrong in getAllLeases");
@@ -42,14 +44,14 @@ public class LeaseRepository {
     // Create by Victor
     public void saveLease(Lease lease){
         try {
-            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, lease_duration) VALUES (?, ?, ?, ?)");
+            System.out.println(lease.getLeaseName());
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
             preparedStatement.setInt(3, lease.getCarNumber());
+            preparedStatement.setString(4, lease.getStringDate());
 
             preparedStatement.executeUpdate();
-
-
 
         }catch (Exception e){
             e.printStackTrace();

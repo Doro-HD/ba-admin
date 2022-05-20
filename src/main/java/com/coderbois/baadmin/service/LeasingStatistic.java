@@ -17,9 +17,6 @@ public class LeasingStatistic {
         this.totalLeases = totalLeases;
     }
 
-
-
-
     public ArrayList<Lease> getLeases() {
         return leases;
     }
@@ -31,21 +28,5 @@ public class LeasingStatistic {
     public int getTotalLeases() {
         return totalLeases;
     }
-
-
-    public void setLeases(ArrayList<Lease> leases) {
-        this.leases = leases;
-    }
-
-    public void setTotalPayout(double totalPayout) {
-        this.totalPayout = totalPayout;
-    }
-
-    public void setTotalLeases(int totalLeases) {
-        this.totalLeases = totalLeases;
-    }
-
-
-
 
 }

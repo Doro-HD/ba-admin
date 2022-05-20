@@ -2,14 +2,12 @@ package com.coderbois.baadmin.service;
 
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.repository.LeaseRepository;
-import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.function.Executable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Service
 public class LeaseService {
@@ -22,6 +20,10 @@ public class LeaseService {
 
 
     public void saveLease(Lease lease){
+        LocalDate myDate = LocalDate.now();
+        LocalDate theDate = myDate.plusMonths(lease.getAmountOfMonths());
+        DateTimeFormatter myFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        lease.setStringDate(theDate.format(myFormater));
         this.leaseRepository.saveLease(lease);
     }
 
