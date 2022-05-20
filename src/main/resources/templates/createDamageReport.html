@@ -14,6 +14,7 @@
             <select th:field="*{carNumber}">
                 <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
             </select>
+
             <button type="submit" value="submit" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
         </form>
     </body>

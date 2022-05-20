@@ -2,7 +2,11 @@ package com.coderbois.baadmin.repository;
 
 import com.coderbois.baadmin.model.Damage;
 import com.coderbois.baadmin.model.DamageReport;
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +20,10 @@ class DamageReportRepositoryTest {
         DamageReport newDamageReport = new DamageReport();
         int carNumber = 1;
         newDamageReport.setCarNumber(carNumber);
+        LocalDate localDate = LocalDate.now();
+        localDate = localDate.plusWeeks(1);
+
+        newDamageReport.setWarningDate(localDate);
 
         boolean reportWasSaved = damageReportRepository.createDamageReport(newDamageReport);
 
@@ -33,5 +41,13 @@ class DamageReportRepositoryTest {
         boolean damageWasSaved = damageReportRepository.addDamageToDamageReport(1, damage);
 
         assertTrue(damageWasSaved);
+    }
+
+    @Test
+    void findDamageReportPastWarningDate() {
+        DamageReportRepository damageReportRepository = new DamageReportRepository();
+        ArrayList<DamageReport> damageReports = damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
+
+        assertFalse(damageReports.isEmpty());
     }
 }
