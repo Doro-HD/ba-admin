@@ -34,8 +34,8 @@ public class LeaseService {
             return (new LeasingStatistic(allLeases, allAmount, countLease));
       }
 
-      public ArrayList<Lease> leaseBySearch(String date){
-            return this.leaseRepository.leaseBySearch(date);
+      public ArrayList<Lease> getLeasesThatExpireByDate(String date){
+            return this.leaseRepository.getLeasesThatExpireByDate(date);
       }
 }
 
