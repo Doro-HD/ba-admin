@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,10 +10,11 @@
 </head>
 <body>
 
-<div th:replace="sidebarFragments :: sidebar"></div>
+<div th:replace="sidebarFragments :: sidebarLease">
+</div>
 <div style="display: inline-block">
     <table>
-        <tr th:each="leases : ${lease}">
+        <tr th:each="lease : ${leases}">
             <td th:text="${lease.leaseDuration}"></td>
         </tr>
     </table>

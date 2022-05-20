@@ -37,16 +37,16 @@ public class BusinessEngineeringController {
     }
 
 
-    @GetMapping("/searchdate")
+    @GetMapping("/searchDate")
     public String getCarsOnSpecificDate(Model model ){
         model.addAttribute("lease", new Lease());
         return "searchDate";
     }
 
-    @PostMapping("/searchdate")
+    @PostMapping("/searchDate")
     public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
-        this.leaseService.getLeasesThatExpireByDate(lease);
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
+        System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
         return "test";
     }
 

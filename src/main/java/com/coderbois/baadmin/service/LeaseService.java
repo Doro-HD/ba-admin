@@ -51,8 +51,7 @@ public class LeaseService {
     }
 
     public ArrayList<Lease> getLeasesThatExpireByDate(Lease lease){
-
-        return this.leaseRepository.getLeasesThatExpireByDate(lease.getLocalDate().toString());
+        return this.leaseRepository.getLeasesThatExpireByDate(lease.getStringDate());
     }
 
 }
