@@ -2,6 +2,7 @@ package com.coderbois.baadmin.controller;
 
 import com.coderbois.baadmin.model.Car;
 import com.coderbois.baadmin.model.Lease;
+import com.coderbois.baadmin.repository.LeaseRepository;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Controller
@@ -45,6 +47,12 @@ public class DataRegistrationController {
             this.leaseService.saveLease(lease);
 
             return "leaseForm";
+      }
+
+      @ResponseBody
+      @GetMapping("/testDate")
+      public ArrayList<Lease> testDate (){
+            return this.leaseService.getLeasePastDueDate();
       }
 
 }

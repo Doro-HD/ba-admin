@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Repository
@@ -31,7 +32,9 @@ public class LeaseRepository {
                 double monthlyPay = resultset.getDouble("monthly_payment");
                 int carNumber = resultset.getInt("car_number");
                 String localDate = resultset.getString("expiration_date");
-                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, localDate));
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+                allLeases.add(new Lease(id, leaseName, monthlyPay, carNumber, LocalDate.parse(localDate, formatter)));
             }
         }catch (Exception e){
             System.out.println("something went wrong in getAllLeases");
@@ -56,6 +59,7 @@ public class LeaseRepository {
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 
     // Create by Troels
