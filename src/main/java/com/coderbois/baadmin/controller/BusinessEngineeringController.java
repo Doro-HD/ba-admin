@@ -27,7 +27,10 @@ public class BusinessEngineeringController {
         return "index";
     }
 
+    public String leaseBySearch(){
 
+        return "";
+    }
 
 
 }
