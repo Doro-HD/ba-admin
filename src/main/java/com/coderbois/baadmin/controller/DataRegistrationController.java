@@ -68,6 +68,7 @@ public class DataRegistrationController {
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
+                  model.addAttribute("currentSite", "oldLease");
 
                   model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
             }
