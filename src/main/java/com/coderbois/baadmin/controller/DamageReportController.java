@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+
 //David
 @Controller
 public class DamageReportController {
@@ -32,12 +35,26 @@ public class DamageReportController {
 
     //David
     @GetMapping("/createDamageReport")
-    public String createDamageReportGet(Model model) {
-        model.addAttribute("currentSite", "createDamageReport");
-        model.addAttribute("damageReport", new DamageReport());
-        model.addAttribute("checkUpCars", this.carService.getCheckUpCars());
+    public String createDamageReportGet(HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
-        return "createDamageReport";
+        if (cookieUsername != null) {
+            endpoint = "createDamageReport";
+
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            model.addAttribute("currentSite", "createDamageReport");
+
+            model.addAttribute("damageReport", new DamageReport());
+            model.addAttribute("checkUpCars", this.carService.getCheckUpCars());
+        }
+
+
+        return endpoint;
     }
 
     //Troels
@@ -50,23 +67,51 @@ public class DamageReportController {
 
     //David
     @GetMapping("/allDamageReports")
-    public String getAllReports(Model model) {
-        model.addAttribute("currentSite", "allDamageReports");
-        model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
-        return "allDamageReports";
+    public String getAllReports(HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+        if (cookieUsername != null) {
+            endpoint = "allDamageReports";
+
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            model.addAttribute("currentSite", "allDamageReports");
+
+            model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
+        }
+
+        return endpoint;
     }
 
     //David
     //Troels
     @GetMapping("/damageReport/{id}")
-    public String damageReportGet(@PathVariable("id") int id, Model model) {
-        DamageReport damageReport = this.damageReportService.findDamageReportById(id);
+    public String damageReportGet(@PathVariable("id") int id, HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
-        model.addAttribute("currentSite", "allDamageReports");
-        model.addAttribute("damageReport", damageReport);
-        model.addAttribute("damage", new Damage());
+        if (cookieUsername != null) {
+            endpoint = "damageReport";
 
-        return "damageReport";
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            DamageReport damageReport = this.damageReportService.findDamageReportById(id);
+
+            model.addAttribute("currentSite", "allDamageReports");
+
+            model.addAttribute("damageReport", damageReport);
+            model.addAttribute("damage", new Damage());
+        }
+
+
+        return endpoint;
     }
 
     //David
@@ -81,10 +126,22 @@ public class DamageReportController {
 
     //Troels
     @GetMapping("/damageReportsPastWarningDate")
-    public String damageReportsPastWarningDate(Model model){
-        model.addAttribute("currentSite", "damageReportPastWarningDate");
-        model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
+    public String damageReportsPastWarningDate(Model model, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
-        return "damageReportsPastWarningDate";
+        if (cookieUsername != null) {
+            endpoint = "damageReportsPastWarningDate";
+
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            model.addAttribute("currentSite", "damageReportPastWarningDate");
+            model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
+        }
+
+        return endpoint;
     }
 }

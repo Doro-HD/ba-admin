@@ -11,7 +11,7 @@ public class LeaseService {
 
     private final LeaseRepository leaseRepository;
 
-    public LeaseService(LeaseRepository leaseRepository){
+    public LeaseService(LeaseRepository leaseRepository) {
         this.leaseRepository = leaseRepository;
     }
 
@@ -23,29 +23,27 @@ public class LeaseService {
             this.leaseRepository.saveLease(lease);
       }
 
-    public LeasingStatistic calculateBusinessInfo(){
+    public LeasingStatistic calculateBusinessInfo() {
         ArrayList<Lease> allLeases = this.leaseRepository.getAllLeases();
         double allAmount = 0;
-        for (Lease lease: allLeases){
+        for (Lease lease : allLeases) {
             allAmount = allAmount + lease.getMonthlyPay();
         }
         int countLease = allLeases.size();
         return (new LeasingStatistic(allLeases, allAmount, countLease));
     }
 
-
-
-    public ArrayList<Lease> getLeasePastDueDate(){
+    public ArrayList<Lease> getLeasePastDueDate() {
         ArrayList<Lease> ourLeases = this.leaseRepository.getAllLeases();
         ArrayList<Lease> ourOldLeases = new ArrayList<>();
-        for (Lease lease : ourLeases){
-            if (lease.getLeaseDuration().isBefore(LocalDate.now())){
+        for (Lease lease : ourLeases) {
+            if (lease.getLeaseDuration().isBefore(LocalDate.now())) {
                 ourOldLeases.add(lease);
             }
         }
         return ourOldLeases;
     }
-    }
+}
 
 
 

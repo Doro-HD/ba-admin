@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Ba-Admin Login</title>
@@ -7,13 +7,12 @@
 </head>
 <body>
 
-<!-- af lasse -->
-
-<form action="login.html" method="post" class="box">
+<form th:object="${user}" action="login" method="post" class="box">
 
     <h1>login</h1>
-    <input type="text" name="" placeholder="Skriv Brugernavn" id="username">
-    <input type="password" name="" placeholder="Skriv Kodeord" id="password">
+    <input th:field="*{username}" type="text" name="" placeholder="Skriv Brugernavn" id="username">
+    <input th:field="*{password}" type="password" name="" placeholder="Skriv Kodeord" id="password">
+
     <input type="submit" name="" value="Login">
 </form>
 

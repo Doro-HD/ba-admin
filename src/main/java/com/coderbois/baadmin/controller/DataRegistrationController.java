@@ -1,8 +1,6 @@
 package com.coderbois.baadmin.controller;
 
-import com.coderbois.baadmin.model.Car;
 import com.coderbois.baadmin.model.Lease;
-import com.coderbois.baadmin.repository.LeaseRepository;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class DataRegistrationController {
@@ -32,34 +28,50 @@ public class DataRegistrationController {
 
       //Created by Lasse
       @GetMapping("/leaseForm")
-      public String createLease (Model model){
-            model.addAttribute("currentSite", "leaseForm");
-            model.addAttribute("lease", new Lease());
-            model.addAttribute("cars", carService.getAvailableCars());
-            return "leaseForm";
+      public String createLease (HttpSession httpSession, Model model){
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+            if (cookieUsername != null) {
+                  endpoint = "leaseForm";
+
+                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+
+                  model.addAttribute("currentSite", "leaseForm");
+                  model.addAttribute("lease", new Lease());
+                  model.addAttribute("cars", carService.getAvailableCars());
+            }
+
+            return endpoint;
       }
 
       //Created by Victor
       @PostMapping("/leaseForm")
       public String createLeasePost (@ModelAttribute Lease lease){
-            System.out.println(lease.getLeaseName());
-            System.out.println(lease.getMonthlyPay());
-            System.out.println(lease.getAmountOfMonths());
             this.leaseService.saveLease(lease);
 
-            return "leaseForm";
-      }
-
-      @ResponseBody
-      @GetMapping("/testDate")
-      public ArrayList<Lease> testDate (){
-            return this.leaseService.getLeasePastDueDate();
+            return "redirect:/leaseForm";
       }
 
       @GetMapping("/oldLease")
-      public String showOldLeases (Model model) {
-            model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
-            return "oldLease";
-      }
+      public String showOldLeases (HttpSession httpSession, Model model) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
+            if (cookieUsername != null) {
+                  endpoint = "oldLease";
+
+                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+
+                  model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
+            }
+
+            return endpoint;
+      }
 }
