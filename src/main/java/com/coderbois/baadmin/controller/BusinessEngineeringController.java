@@ -47,7 +47,7 @@ public class BusinessEngineeringController {
     public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
         System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
-        return "test";
+        return "/test";
     }
 
 

@@ -65,7 +65,7 @@ public class LeaseRepository {
     // Create by Troels
     public ArrayList<Lease> getLeasesThatExpireByDate(String date){
         ArrayList<Lease> leases = new ArrayList<>();
-        String sql = "SELECT * FROM leases WHERE expiration_date = " + date;
+        String sql = "SELECT * FROM leases WHERE expiration_date =  \"" + date + "\"";
         try{
             ResultSet resultSet = this.jdbcConnector.getStatement().executeQuery(sql);
             while (resultSet.next()){
