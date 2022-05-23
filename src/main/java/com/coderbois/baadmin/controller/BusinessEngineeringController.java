@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class BusinessEngineeringController {
@@ -47,7 +46,7 @@ public class BusinessEngineeringController {
     public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
         System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
-        return "/test";
+        return "leasesBySearch";
     }
 
 
