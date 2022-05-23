@@ -1,7 +1,10 @@
 package com.coderbois.baadmin.service;
+
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.repository.LeaseRepository;
+
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,15 +18,17 @@ public class LeaseService {
         this.leaseRepository = leaseRepository;
     }
 
-      public void saveLease(Lease lease) {
-            LocalDate myDate = LocalDate.now();
-            LocalDate theDate = myDate.plusMonths(lease.getAmountOfMonths());
-            DateTimeFormatter myFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            lease.setStringDate(theDate.format(myFormater));
-            this.leaseRepository.saveLease(lease);
-      }
 
-    public LeasingStatistic calculateBusinessInfo() {
+    public void saveLease(Lease lease) {
+        LocalDate myDate = LocalDate.now();
+        LocalDate theDate = myDate.plusMonths(lease.getAmountOfMonths());
+        DateTimeFormatter myFormater = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        lease.setStringDate(theDate.format(myFormater));
+        this.leaseRepository.saveLease(lease);
+    }
+
+
+    public LeasingStatistic calculateBusinessInfo(){
         ArrayList<Lease> allLeases = this.leaseRepository.getAllLeases();
         double allAmount = 0;
         for (Lease lease : allLeases) {
@@ -33,7 +38,9 @@ public class LeaseService {
         return (new LeasingStatistic(allLeases, allAmount, countLease));
     }
 
-    public ArrayList<Lease> getLeasePastDueDate() {
+
+
+    public ArrayList<Lease> getLeasePastDueDate(){
         ArrayList<Lease> ourLeases = this.leaseRepository.getAllLeases();
         ArrayList<Lease> ourOldLeases = new ArrayList<>();
         for (Lease lease : ourLeases) {
@@ -43,6 +50,11 @@ public class LeaseService {
         }
         return ourOldLeases;
     }
+
+    public ArrayList<Lease> getLeasesThatExpireByDate(Lease lease){
+        return this.leaseRepository.getLeasesThatExpireByDate(lease.getStringDate());
+    }
+
 }
 
 

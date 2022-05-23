@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -43,7 +44,6 @@ public class LeaseRepository {
     }
 
 
-
     // Create by Victor
     public void saveLease(Lease lease){
         try {
@@ -60,5 +60,29 @@ public class LeaseRepository {
             e.printStackTrace();
         }
 
+    }
+
+    // Create by Troels
+    public ArrayList<Lease> getLeasesThatExpireByDate(String date){
+        ArrayList<Lease> leases = new ArrayList<>();
+        String sql = "SELECT * FROM leases WHERE expiration_date =  \"" + date + "\"";
+        try{
+            ResultSet resultSet = this.jdbcConnector.getStatement().executeQuery(sql);
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String leaseName = resultSet.getString("lease_name");
+                double monthlyPay = resultSet.getDouble("monthly_payment");
+                int carNumber = resultSet.getInt("car_number");
+                String localDate = resultSet.getString("expiration_date");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+                leases.add(new Lease(id, leaseName, monthlyPay, carNumber, LocalDate.parse(localDate, formatter)));
+            }
+        }catch (SQLException e){
+            System.out.println("Something went wrong in leasesBySearch");
+            e.printStackTrace();
+        }
+
+        return leases;
     }
 }
