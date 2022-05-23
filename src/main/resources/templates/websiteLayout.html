@@ -41,6 +41,12 @@
         Se udlejede biler
       </a>
     </li>
+    <li th:if="${userRole} == 'businessEnginering'">
+      <a href="/searchDate" class="nav-link" th:classappend="${currentSite} == 'searchDate' ? active : text-white">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+        Søg efter lejeaftaler ud fra dato
+      </a>
+    </li>
     <li th:if="${userRole} == 'damageReport'">
       <a href="/createDamageReport" class="nav-link" th:classappend="${currentSite} == 'createDamageReport' ? active : text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>

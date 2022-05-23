@@ -69,15 +69,33 @@ public class BusinessEngineeringController {
 
 
     @GetMapping("/searchDate")
-    public String getCarsOnSpecificDate(Model model ){
-        model.addAttribute("lease", new Lease());
-        return "searchDate";
+    public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+        if (cookieUsername != null) {
+            endpoint = "businessStats";
+
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            model.addAttribute("currentSite", "searchDate");
+
+            model.addAttribute("lease", new Lease());
+            return "searchDate";
+        }
+
+        return endpoint;
     }
+
 
     @PostMapping("/searchDate")
     public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
         System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
+        model.addAttribute("currentSite", "searchDate");
         return "carByDate";
     }
 
