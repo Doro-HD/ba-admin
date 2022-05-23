@@ -74,7 +74,7 @@ public class BusinessEngineeringController {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
         if (cookieUsername != null) {
-            endpoint = "businessStats";
+            endpoint = "searchDate";
 
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
@@ -84,7 +84,6 @@ public class BusinessEngineeringController {
             model.addAttribute("currentSite", "searchDate");
 
             model.addAttribute("lease", new Lease());
-            return "searchDate";
         }
 
         return endpoint;
@@ -92,9 +91,16 @@ public class BusinessEngineeringController {
 
 
     @PostMapping("/searchDate")
-    public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model){
+    public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model){
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
-        System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
+
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        model.addAttribute("username", cookieUsername.getValue());
+        model.addAttribute("userRole", cookieUserRole.getValue());
+
+
         model.addAttribute("currentSite", "searchDate");
         return "carByDate";
     }
