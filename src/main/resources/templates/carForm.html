@@ -5,12 +5,15 @@
       <title>Opret ny bil</title>
   </head>
   <body>
-    <form th:object="${car}" th:action="@{''}" method="post">
-      <label>Vogn nummer</label>
-      <input type="number">
+    <div th:replace="websiteLayout :: sidebar"></div>
+    <div style="display: inline-block">
+      <form th:object="${car}" th:action="@{''}" method="post">
+        <label>Vogn nummer</label>
+        <input type="number">
 
-      <label>Stel nummer</label>
-      <input type="text">
-    </form>
+        <label>Stel nummer</label>
+        <input type="text">
+      </form>
+    </div>
   </body>
 </html>
