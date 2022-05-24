@@ -83,6 +83,7 @@ public class BusinessEngineeringController {
             return "carByDate";
       }
 
+      @GetMapping("/lagerbestand")
       public String checkWarehouse(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");

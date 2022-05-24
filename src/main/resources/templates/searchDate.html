@@ -16,12 +16,14 @@
 <div th:replace="sidebarFragments :: sidebarLease">
 </div>
 
-<div class="contractform" style="display: inline-block;">
-    <form th:object="${lease}" method="post" th:action="@{/searchDate}">
-        <label class="form-label mt-10">Indtast dato i format yyyy-mm-d</label>
-        <input type="text" th:field="*{stringDate}" name="createStringDate" class="form-control">
-        <button type="submit" value="submit" class="btn btn-outline-primary mt-3 mb-3">Søg</button>
-    </form>
+<div style="margin-left: 300px">
+    <div class="contractform" style="display: inline-block;">
+        <form th:object="${lease}" method="post" th:action="@{/searchDate}">
+            <label class="form-label mt-10">Indtast dato i format yyyy-mm-d</label>
+            <input type="text" th:field="*{stringDate}" name="createStringDate" class="form-control">
+            <button type="submit" value="submit" class="btn btn-outline-primary mt-3 mb-3">Søg</button>
+        </form>
+    </div>
 </div>
 
 </body>

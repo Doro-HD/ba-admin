@@ -18,38 +18,42 @@
 <div th:replace="websiteLayout :: sidebar">
 </div>
 
-<div class="contractform" style="display: inline-block;">
-    <form th:object="${lease}" method="post" th:action="@{/leaseForm}">
-        <label class="form-label mt-10">Kunde Navn</label>
-        <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
+<div style="margin-left: 300px">
+    <div class="contractform" style="display: inline-block;">
+        <form th:object="${lease}" method="post" th:action="@{/leaseForm}">
+            <label class="form-label mt-10">Kunde Navn</label>
+            <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
 
-        <br>
+            <br>
 
-        <label class="form-label mt-10">Månedlig betaling</label>
-        <input type="text" th:field="*{monthlyPay}" name="createMonthyPay" class="form-control">
+            <label class="form-label mt-10">Månedlig betaling</label>
+            <input type="text" th:field="*{monthlyPay}" name="createMonthyPay" class="form-control">
 
-        <br>
+            <br>
 
-        <label class="form-label mt-10">Vælg Bil</label>
-        <select th:field="*{carNumber}">
-            <option th:value="${car.carId}" th:each="car : ${cars}" th:text="${car.carId}"></option>
-        </select>
+            <label class="form-label mt-10">Vælg Bil</label>
+            <select th:field="*{carNumber}">
+                <option th:value="${car.carId}" th:each="car : ${cars}" th:text="${car.carId}"></option>
+            </select>
 
-        <br>
+            <br>
 
-        <label class="form-label mt-10">Varighed/Måned</label>
-        <input type="text" th:field="*{amountOfMonths}" name="leaseDuration" class="form-control">
+            <label class="form-label mt-10">Varighed/Måned</label>
+            <input type="text" th:field="*{amountOfMonths}" name="leaseDuration" class="form-control">
 
-        <br>
+            <br>
 
-        <button type="submit" onclick="clickAlert()" value="submit" class="btn btn-outline-primary mt-3 mb-3">Opret Leasing Aftale</button>
+            <button type="submit" onclick="clickAlert()" value="submit" class="btn btn-outline-primary mt-3 mb-3">Opret
+                Leasing Aftale
+            </button>
 
-        <script>
-            function clickAlert() {
-                alert("Lejeaftale Oprettet!");
-            }
-        </script>
-    </form>
+            <script>
+                function clickAlert() {
+                    alert("Lejeaftale Oprettet!");
+                }
+            </script>
+        </form>
+    </div>
 </div>
 
 </body>
