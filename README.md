@@ -54,10 +54,13 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 ## DataRegistration
 - [X] Oprette lejeaftale.
 - [X] Oprette biler.
+- [ ] Bil ændre stadie til udlejet efter oprettet lejeaftale.
+- [ ] Ændre bils stadie fra udlejet til check up.
 ## Skade og udbedring 
 - [X] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden.
 - [X] UI til skades rapport der har overskredet en bestemt advarselsdato. 
 - [X] UI til at se hvilke skades reporter brugeren har oprettet.
+- [ ] Bil ændre stadie fra checkup til skadet eller ledig efter check up
 ## BusinessEngineering 
 - [X] se hvor mange biler der er lejet ud samt samlet pris
 ## CarService
