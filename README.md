@@ -50,12 +50,14 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 ## Login
 - [ ] Generere hashed passwords.
 - [X] Validere passwords.
-- [ ] Brugere kan logge ind på det interne system.
+- [X] Brugere kan logge ind på det interne system.
 ## DataRegistration
 - [X] Oprette lejeaftale.
+- [X] Oprette biler.
 ## Skade og udbedring 
 - [X] oprette skades reporter på tilbageleveret biler som har overstået lejeperioden.
-- [ ] UX til at se hvilke skades reporter brugeren har oprettet.
+- [X] UI til skades rapport der har overskredet en bestemt advarselsdato. 
+- [X] UI til at se hvilke skades reporter brugeren har oprettet.
 ## BusinessEngineering 
 - [X] se hvor mange biler der er lejet ud samt samlet pris
 ## CarService
