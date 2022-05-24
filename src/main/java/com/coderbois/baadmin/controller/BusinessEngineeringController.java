@@ -2,6 +2,7 @@ package com.coderbois.baadmin.controller;
 
 
 import com.coderbois.baadmin.model.Lease;
+import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,22 +28,13 @@ public class BusinessEngineeringController {
             this.carService = carService;
       }
 
-
+      //Authors
+      //David
+      //Victor
       @GetMapping("/businessStats")
       public String getBusinessStatistic(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-    public BusinessEngineeringController(LeaseService leaseService){
-        this.leaseService = leaseService;
-    }
-
-    //Authors
-    //David
-    //Victor
-    @GetMapping("/businessStats")
-    public String getBusinessStatistic(HttpSession httpSession, Model model) {
-        String endpoint = "redirect:/login";
-        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
             if (cookieUsername != null) {
                   endpoint = "businessStats";
@@ -63,13 +55,8 @@ public class BusinessEngineeringController {
       public String homePageGet(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-    //Author
-    //David
-    @GetMapping("/")
-    public String homePageGet(HttpSession httpSession, Model model){
-        String endpoint = "redirect:/login";
-        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-
+            //Author
+            //David
             if (cookieUsername != null) {
                   endpoint = "index";
 
@@ -85,63 +72,49 @@ public class BusinessEngineeringController {
             return endpoint;
       }
 
-      public String getLeasesThatExpireByDate() {
-
-            return "";
-      }
-
-
+      //Author
+      //Victor
       @GetMapping("/searchDate")
-      public String getCarsOnSpecificDate(Model model) {
-            model.addAttribute("lease", new Lease());
-            return "searchDate";
+      public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+            if (cookieUsername != null) {
+                  endpoint = "searchDate";
+
+                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+
+                  model.addAttribute("currentSite", "searchDate");
+
+                  model.addAttribute("lease", new Lease());
+            }
+
+            return endpoint;
       }
-    //Author
-    //Victor
-    @GetMapping("/searchDate")
-    public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
-        String endpoint = "redirect:/login";
-        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
-        if (cookieUsername != null) {
-            endpoint = "searchDate";
+      //Author
+      //David
+      //Victor
+      @PostMapping("/searchDate")
+      public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model) {
+            model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
 
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
 
             model.addAttribute("currentSite", "searchDate");
-
-            model.addAttribute("lease", new Lease());
-        }
-
-        return endpoint;
-    }
-
-      @PostMapping("/searchDate")
-      public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model) {
-            model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
-            System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
             return "carByDate";
       }
-    //Author
-    //David
-    //Victor
-    @PostMapping("/searchDate")
-    public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model){
-        model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
 
-        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        model.addAttribute("username", cookieUsername.getValue());
-        model.addAttribute("userRole", cookieUserRole.getValue());
-
-        model.addAttribute("currentSite", "searchDate");
-        return "carByDate";
-    }
-
+      //Author
+      //Lasse
       @GetMapping("/lagerbestand")
       public String checkWarehouse(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
@@ -158,7 +131,6 @@ public class BusinessEngineeringController {
 
                   model.addAttribute("currentSite", "checkWarehouse");
             }
-
 
             return endpoint;
       }
