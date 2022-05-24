@@ -11,15 +11,18 @@ public class DamageReport {
     private ArrayList<Damage> damages;
     private double totalCost;
     private int carNumber;
+    private int listSize;
+
 
     private LocalDate warningDate;
 
-    public DamageReport(){
+    public DamageReport() {
         this.damages = new ArrayList<>();
     }
 
-    public void addDamage(Damage damage){
+    public void addDamage(Damage damage) {
         this.damages.add(damage);
+        this.listSize++;
     }
 
     public String getWarningDateAsString() {
@@ -31,6 +34,7 @@ public class DamageReport {
     public ArrayList<Damage> getDamage() {
         return damages;
     }
+
     public void setDamage(ArrayList<Damage> damage) {
         this.damages = damage;
     }
@@ -61,5 +65,13 @@ public class DamageReport {
 
     public void setWarningDate(LocalDate warningDate) {
         this.warningDate = warningDate;
+    }
+
+    public void setListSize(int listSize) {
+        this.listSize = listSize;
+    }
+
+    public int getListSize() {
+        return listSize;
     }
 }

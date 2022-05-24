@@ -56,6 +56,20 @@ public class DamageReportService {
 
     //David
     public ArrayList<DamageReport> findDamageReportPastWarningDate() {
+
+        //Skal ligge længden af skades listen til attributten listSize
+        /*
+        ArrayList<DamageReport> damageReports = this.damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
+
+        for (int i = 0; i < damageReports.size(); i++) {
+
+            int x = damageReports.get(i).getDamage().size();
+            damageReports.get(i).setListSize(x);
+        }
+
+         */
+
+
         return this.damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
     }
 }

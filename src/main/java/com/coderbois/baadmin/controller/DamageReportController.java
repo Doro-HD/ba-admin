@@ -82,6 +82,7 @@ public class DamageReportController {
             model.addAttribute("currentSite", "allDamageReports");
 
             model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
+            model.addAttribute("numberOfDmg", this.damageReportService.getAllDamageReports().size());
         }
 
         return endpoint;
