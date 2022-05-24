@@ -18,6 +18,10 @@ public class CarService {
             this.carRepository = carRepository;
       }
 
+      //David
+      public void createCar(Car car) {
+            this.carRepository.createCar(car);
+      }
       public ArrayList<Car> getAllCars(){ // af Lasse
             return carRepository.getAllCars();
       }

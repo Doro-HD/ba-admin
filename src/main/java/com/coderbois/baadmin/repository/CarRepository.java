@@ -4,7 +4,9 @@ import com.coderbois.baadmin.model.Car;
 import com.coderbois.baadmin.model.CarState;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
@@ -46,6 +48,20 @@ public class CarRepository {
                   e.printStackTrace();
             }
             return allCars;
+      }
+
+      public void createCar(Car car) {
+            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO cars (car_number, chassis_number, car_state) VALUES (?, ?, ?)");
+
+            try {
+                  preparedStatement.setInt(1, car.getCarId());
+                  preparedStatement.setString(2, car.getChassisNumber());
+                  preparedStatement.setString(3, car.getCarState().getName());
+
+                  preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                  throw new RuntimeException(e);
+            }
       }
 
 }

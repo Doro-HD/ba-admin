@@ -1,5 +1,6 @@
 package com.coderbois.baadmin.controller;
 
+import com.coderbois.baadmin.model.Car;
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
@@ -23,6 +24,34 @@ public class DataRegistrationController {
       public DataRegistrationController(CarService carService, LeaseService leaseService){
             this.carService = carService;
             this.leaseService = leaseService;
+      }
+
+      //David
+      @GetMapping("/createCar")
+      public String createCar(HttpSession httpSession, Model model) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+            if (cookieUsername != null) {
+                  endpoint = "carForm";
+
+                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+
+                  model.addAttribute("currentSite", "carForm");
+            }
+
+            return endpoint;
+      }
+
+      //David
+      @PostMapping("createCar")
+      public String createCarPost(@ModelAttribute Car car) {
+            this.carService.createCar(car);
+
+            return "redirect:/createCar";
       }
 
 
