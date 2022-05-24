@@ -1,8 +1,10 @@
 package com.coderbois.baadmin.model;
 
-
 import java.time.LocalDate;
 
+//Author
+//Lasse
+//Victor
 public class Lease {
     private int id;
 

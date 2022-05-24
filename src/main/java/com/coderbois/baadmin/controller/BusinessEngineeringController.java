@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+//Authors:
+//David
+//Lasse
+//Troels
+//Victor
 @Controller
 public class BusinessEngineeringController {
     private final LeaseService leaseService;
@@ -20,8 +25,9 @@ public class BusinessEngineeringController {
         this.leaseService = leaseService;
     }
 
-
-
+    //Authors
+    //David
+    //Victor
     @GetMapping("/businessStats")
     public String getBusinessStatistic(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
@@ -42,6 +48,8 @@ public class BusinessEngineeringController {
         return endpoint;
     }
 
+    //Author
+    //David
     @GetMapping("/")
     public String homePageGet(HttpSession httpSession, Model model){
         String endpoint = "redirect:/login";
@@ -62,12 +70,8 @@ public class BusinessEngineeringController {
         return endpoint;
     }
 
-    public String getLeasesThatExpireByDate(){
-
-        return "";
-    }
-
-
+    //Author
+    //Victor
     @GetMapping("/searchDate")
     public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
@@ -89,7 +93,9 @@ public class BusinessEngineeringController {
         return endpoint;
     }
 
-
+    //Author
+    //David
+    //Victor
     @PostMapping("/searchDate")
     public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model){
         model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
@@ -99,7 +105,6 @@ public class BusinessEngineeringController {
 
         model.addAttribute("username", cookieUsername.getValue());
         model.addAttribute("userRole", cookieUserRole.getValue());
-
 
         model.addAttribute("currentSite", "searchDate");
         return "carByDate";

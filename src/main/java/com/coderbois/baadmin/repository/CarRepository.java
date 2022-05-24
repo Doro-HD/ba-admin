@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+//Authors
+//David
+//Lasse
 @Repository
 public class CarRepository {
 
@@ -18,28 +21,40 @@ public class CarRepository {
             this.jdbcConnector = new JdbcConnector();
       }
 
+      //Authors
+      //David
+      //Lasse
       public ArrayList<Car> getAllCars (){ // af Lasse
             ArrayList<Car> allCars = new ArrayList<>();
             try{
                   String sql = "SELECT * FROM cars";
                   ResultSet resultSet = this.jdbcConnector.getStatement().executeQuery(sql);
                   while(resultSet.next()){
+                        Car car = new Car();
+
                         int id = resultSet.getInt("car_number");
                         String chassisNumber = resultSet.getString("chassis_number");
-                        int carStateInt = resultSet.getInt("car_state");
+                        String carStateString = resultSet.getString("car_state");
+
                         CarState carState;
-                        if(carStateInt == 1){
+
+                        if (carStateString.equals(CarState.AVAILABLE.getName())) {
                               carState = CarState.AVAILABLE;
-                        }
-                        else if (carStateInt == 2){
+                        } else if (carStateString.equals(CarState.LEASED.getName())) {
                               carState = CarState.LEASED;
-                        }
-                        else if (carStateInt == 3) {
-                              carState = CarState.DAMAGED;
-                        } else{
+                        } else if (carStateString.equals(CarState.CHECKUP.getName())) {
                               carState = CarState.CHECKUP;
+                        } else if (carStateString.equals(CarState.DAMAGED.getName())) {
+                              carState = CarState.DAMAGED;
+                        } else {
+                              carState = null;
                         }
-                        allCars.add(new Car(id, chassisNumber, carState));
+
+                        car.setCarId(id);
+                        car.setChassisNumber(chassisNumber);
+                        car.setCarState(carState);
+
+                        allCars.add(car);
                   }
 
             }catch(Exception e){
@@ -47,9 +62,12 @@ public class CarRepository {
                   System.out.println("Something went wrong in getAllCars");
                   e.printStackTrace();
             }
+
             return allCars;
       }
 
+      //Author
+      //David
       public void createCar(Car car) {
             PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO cars (car_number, chassis_number, car_state) VALUES (?, ?, ?)");
 

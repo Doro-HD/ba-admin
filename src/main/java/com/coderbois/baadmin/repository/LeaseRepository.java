@@ -11,6 +11,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+//Authors
+//Lasse
+//Troels
+//Victor
 @Repository
 public class LeaseRepository {
 
@@ -20,7 +24,9 @@ public class LeaseRepository {
         this.jdbcConnector = new JdbcConnector();
     }
 
-    // created by Lasse
+    //Authors
+    //Lasse
+    //Victor
     public ArrayList<Lease> getAllLeases (){
         ArrayList<Lease> allLeases = new ArrayList<>();
         try{
@@ -43,12 +49,12 @@ public class LeaseRepository {
         return allLeases;
     }
 
-
-    // Create by Victor
+    //Author
+    //Lasse
+    // Victor
     public void saveLease(Lease lease){
         try {
             PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("INSERT INTO leases(lease_name, monthly_payment, car_number, expiration_date) VALUES (?, ?, ?, ?)");
-            System.out.println(lease.getLeaseName());
             preparedStatement.setString(1, lease.getLeaseName());
             preparedStatement.setDouble(2, lease.getMonthlyPay());
             preparedStatement.setInt(3, lease.getCarNumber());
@@ -62,7 +68,8 @@ public class LeaseRepository {
 
     }
 
-    // Create by Troels
+    //Author
+    // Troels
     public ArrayList<Lease> getLeasesThatExpireByDate(String date){
         ArrayList<Lease> leases = new ArrayList<>();
         String sql = "SELECT * FROM leases WHERE expiration_date =  \"" + date + "\"";

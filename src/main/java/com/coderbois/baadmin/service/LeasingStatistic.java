@@ -4,8 +4,9 @@ import com.coderbois.baadmin.model.Lease;
 
 import java.util.ArrayList;
 
+//Author
+//Victor
 public class LeasingStatistic {
-
 
     private ArrayList<Lease> leases;
     private double totalPayout;

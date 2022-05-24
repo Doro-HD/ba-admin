@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+//Authors
 //David
+//Troels
+//Victor
 @Controller
 public class DamageReportController {
 
@@ -28,11 +31,7 @@ public class DamageReportController {
         this.carService = carService;
     }
 
-    //David
-    public String homePageGet() {
-        return "";
-    }
-
+    //Authors
     //David
     @GetMapping("/createDamageReport")
     public String createDamageReportGet(HttpSession httpSession, Model model) {
@@ -57,6 +56,7 @@ public class DamageReportController {
         return endpoint;
     }
 
+    //Author
     //Troels
     @PostMapping("/createDamageReport")
     public String createDamageReportPost(@ModelAttribute DamageReport damageReport) {
@@ -65,6 +65,7 @@ public class DamageReportController {
         return "redirect:/createDamageReport";
     }
 
+    //Author
     //David
     @GetMapping("/allDamageReports")
     public String getAllReports(HttpSession httpSession, Model model) {
@@ -87,6 +88,7 @@ public class DamageReportController {
         return endpoint;
     }
 
+    //Author
     //David
     //Troels
     @GetMapping("/damageReport/{id}")
@@ -114,6 +116,7 @@ public class DamageReportController {
         return endpoint;
     }
 
+    //Author
     //David
     @PostMapping("/damageReport/{id}")
     public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage, Model model) {
@@ -124,7 +127,8 @@ public class DamageReportController {
         return "redirect:/damageReport/" + id;
     }
 
-    //Troels
+    //Author
+    //David
     @GetMapping("/damageReportsPastWarningDate")
     public String damageReportsPastWarningDate(Model model, HttpSession httpSession) {
         String endpoint = "redirect:/login";

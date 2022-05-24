@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-//Troels oprettet klassen og tilføjet constructor og attributter
+//Author
+//David
+//Troels
 public class DamageReport {
 
     private int id;

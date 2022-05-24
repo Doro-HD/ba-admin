@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+//Author
+//David
+//Lasse
+//Victor
 @Controller
 public class DataRegistrationController {
 
@@ -26,6 +30,7 @@ public class DataRegistrationController {
             this.leaseService = leaseService;
       }
 
+      //Author
       //David
       @GetMapping("/createCar")
       public String createCar(HttpSession httpSession, Model model) {
@@ -48,6 +53,7 @@ public class DataRegistrationController {
             return endpoint;
       }
 
+      //Author
       //David
       @PostMapping("createCar")
       public String createCarPost(@ModelAttribute Car car) {
@@ -57,7 +63,9 @@ public class DataRegistrationController {
       }
 
 
-      //Created by Lasse
+      //Authors
+      //David
+      //Lasse
       @GetMapping("/leaseForm")
       public String createLease (HttpSession httpSession, Model model){
             String endpoint = "redirect:/login";
@@ -79,7 +87,8 @@ public class DataRegistrationController {
             return endpoint;
       }
 
-      //Created by Victor
+      //Author
+      //Victor
       @PostMapping("/leaseForm")
       public String createLeasePost (@ModelAttribute Lease lease){
             this.leaseService.saveLease(lease);
@@ -87,6 +96,9 @@ public class DataRegistrationController {
             return "redirect:/leaseForm";
       }
 
+      //Authors
+      //David
+      //Lasse
       @GetMapping("/oldLease")
       public String showOldLeases (HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
