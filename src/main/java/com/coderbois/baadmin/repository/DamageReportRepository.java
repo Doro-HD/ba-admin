@@ -9,11 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
+//Authors
 //David
 //Troels
 @Repository
@@ -21,11 +19,12 @@ public class DamageReportRepository {
 
     private JdbcConnector jdbcConnector;
 
-    //David
     public DamageReportRepository() {
         this.jdbcConnector = new JdbcConnector();
     }
 
+    //Authors
+    //David
     //Troels
     public boolean createDamageReport(DamageReport damageReport) {
         boolean wasCreated = false;
@@ -46,6 +45,7 @@ public class DamageReportRepository {
         return wasCreated;
     }
 
+    //Authors
     //David
     //Troels
     private ArrayList<DamageReport> getAllDamageReports(String sql) {
@@ -89,11 +89,13 @@ public class DamageReportRepository {
         return damageReports;
     }
 
+    //Author
     //David
     public ArrayList<DamageReport> getAllDamageReports() {
         return this.getAllDamageReports("SELECT * FROM damage_reports");
     }
 
+    //Author
     //David
     public DamageReport findDamageReportByCarNumber(int carNumber) {
         DamageReport damageReport;
@@ -108,6 +110,7 @@ public class DamageReportRepository {
         return damageReport;
     }
 
+    //Author
     //David
     public DamageReport findDamageReportById(int id) {
         DamageReport damageReport;
@@ -122,11 +125,13 @@ public class DamageReportRepository {
         return damageReport;
     }
 
+    //Author
     //David
     public ArrayList<DamageReport> findDamageReportPastWarningDate(String date) {
         return this.getAllDamageReports("SELECT * FROM damage_reports WHERE warning_date <= \"" + date + "\" ORDER BY warning_date ASC");
     }
 
+    //Author
     //David
     public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         boolean wasDamageAdded = false;

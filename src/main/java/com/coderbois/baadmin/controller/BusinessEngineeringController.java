@@ -2,7 +2,6 @@ package com.coderbois.baadmin.controller;
 
 
 import com.coderbois.baadmin.model.Lease;
-import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+//Authors:
+//David
+//Lasse
+//Troels
+//Victor
 @Controller
 public class BusinessEngineeringController {
       private final LeaseService leaseService;
@@ -28,6 +32,17 @@ public class BusinessEngineeringController {
       public String getBusinessStatistic(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+    public BusinessEngineeringController(LeaseService leaseService){
+        this.leaseService = leaseService;
+    }
+
+    //Authors
+    //David
+    //Victor
+    @GetMapping("/businessStats")
+    public String getBusinessStatistic(HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
             if (cookieUsername != null) {
                   endpoint = "businessStats";
@@ -48,6 +63,12 @@ public class BusinessEngineeringController {
       public String homePageGet(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+    //Author
+    //David
+    @GetMapping("/")
+    public String homePageGet(HttpSession httpSession, Model model){
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
 
             if (cookieUsername != null) {
                   endpoint = "index";
@@ -75,6 +96,28 @@ public class BusinessEngineeringController {
             model.addAttribute("lease", new Lease());
             return "searchDate";
       }
+    //Author
+    //Victor
+    @GetMapping("/searchDate")
+    public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
+        String endpoint = "redirect:/login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+
+        if (cookieUsername != null) {
+            endpoint = "searchDate";
+
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            model.addAttribute("username", cookieUsername.getValue());
+            model.addAttribute("userRole", cookieUserRole.getValue());
+
+            model.addAttribute("currentSite", "searchDate");
+
+            model.addAttribute("lease", new Lease());
+        }
+
+        return endpoint;
+    }
 
       @PostMapping("/searchDate")
       public String postCarsOnSpecificDate(@ModelAttribute Lease lease, Model model) {
@@ -82,6 +125,22 @@ public class BusinessEngineeringController {
             System.out.println(this.leaseService.getLeasesThatExpireByDate(lease));
             return "carByDate";
       }
+    //Author
+    //David
+    //Victor
+    @PostMapping("/searchDate")
+    public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model){
+        model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
+
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        model.addAttribute("username", cookieUsername.getValue());
+        model.addAttribute("userRole", cookieUserRole.getValue());
+
+        model.addAttribute("currentSite", "searchDate");
+        return "carByDate";
+    }
 
       @GetMapping("/lagerbestand")
       public String checkWarehouse(HttpSession httpSession, Model model) {

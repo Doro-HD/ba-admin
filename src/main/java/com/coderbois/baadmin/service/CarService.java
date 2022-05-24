@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+//Authors
+//Troels
+//Victor
 @Service
 public class CarService {
 
@@ -18,20 +21,30 @@ public class CarService {
             this.carRepository = carRepository;
       }
 
+      //Author
+      //David
+      public void createCar(Car car) {
+            this.carRepository.createCar(car);
+      }
+
+      //Author
+      //Lasse
       public ArrayList<Car> getAllCars(){ // af Lasse
             return carRepository.getAllCars();
       }
 
-
-
-      //Created by Victor
+      //Author
+      //Victor
       public ArrayList<Car> getAvailableCars(){
             ArrayList<Car> cars = this.carRepository.getAllCars();
             cars.removeIf(car -> car.getCarState() != CarState.AVAILABLE);
 
             return cars;
       }
-      //Troels & David
+
+      //Author
+      //David
+      //Troels
       public ArrayList<Car> getCheckUpCars(){
             ArrayList<Car> cars = this.carRepository.getAllCars();
             cars.removeIf(car -> car.getCarState() != CarState.CHECKUP);

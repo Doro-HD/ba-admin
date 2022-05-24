@@ -26,7 +26,6 @@ public class JdbcConnector {
         try {
             statement = connection.createStatement();
         } catch (SQLException e) {
-            //Todo: remove the print stack trace below when we move to production
             e.printStackTrace();
             return null;
         }
@@ -40,7 +39,6 @@ public class JdbcConnector {
         try {
             preparedStatement = connection.prepareStatement(sql);
         } catch (SQLException e) {
-            //Todo: remove the print stack trace below when we move to production
             e.printStackTrace();
             return null;
         }

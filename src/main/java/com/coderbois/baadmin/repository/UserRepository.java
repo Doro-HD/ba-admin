@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+//Authors
+//David
 //Troels
+//Victor
 @Repository
 public class UserRepository {
 
@@ -21,7 +23,10 @@ public class UserRepository {
 
     }
 
+    //Authors
     //David
+    //Troels
+    //Victor
     public User findUserByUsername(String username){
         final String SQL = "SELECT * FROM users WHERE username = '" + username + "'";
         Statement statement = jdbcConnector.getStatement();

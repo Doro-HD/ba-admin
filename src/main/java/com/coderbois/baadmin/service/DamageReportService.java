@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+//Authors
 //David
 //Troels
 @Service
@@ -23,11 +24,13 @@ public class DamageReportService {
         this.damageReportRepository = damageReportRepository;
     }
 
+    //Author
     //David
     public ArrayList<DamageReport> getAllDamageReports() {
         return this.damageReportRepository.getAllDamageReports();
     }
 
+    //Authors
     //Troels
     //David
     public boolean createDamageReport(DamageReport damageReport) {
@@ -39,21 +42,25 @@ public class DamageReportService {
         return this.damageReportRepository.createDamageReport(damageReport);
     }
 
+    //Author
     //Troels
     public DamageReport findDamageReportByCarNumber(int carNumber) {
         return this.damageReportRepository.findDamageReportByCarNumber(carNumber);
     }
 
+    //Author
     //Troels
     public DamageReport findDamageReportById(int id) {
         return this.damageReportRepository.findDamageReportById(id);
     }
 
+    //Author
     //Troels
     public boolean addDamageToDamageReport(int damageReportId, Damage damage) {
         return this.damageReportRepository.addDamageToDamageReport(damageReportId, damage);
     }
 
+    //Author
     //David
     public ArrayList<DamageReport> findDamageReportPastWarningDate() {
         return this.damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());

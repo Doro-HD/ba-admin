@@ -1,5 +1,7 @@
 package com.coderbois.baadmin.model;
 
+//Author
+//David
 public class User {
 
     private String username;

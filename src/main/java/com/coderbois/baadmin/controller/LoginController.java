@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
+//Authors
 //David
+//
 @Controller
 public class LoginController {
 
@@ -32,6 +34,7 @@ public class LoginController {
         return "login";
     }
 
+    //Author
     //David
     @PostMapping("/login")
     public String loginPost(@ModelAttribute User userAttemptingToLogin, HttpSession httpSession){
@@ -59,6 +62,7 @@ public class LoginController {
         return "redirect:" + endpoint;
     }
 
+    //Author
     //David
     @GetMapping("/logout")
     public String logoutPost(HttpSession httpSession){
