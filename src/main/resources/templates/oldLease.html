@@ -20,17 +20,26 @@
 
 </div>
 
-<div th:each="lease : ${oldLease}" style="padding: 25px; display: inline-block;">
-    <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase;">
-        <img src="https://cdn-icons-png.flaticon.com/512/197/197717.png" class="card-img-top" style="height: 80%; width: 80%; padding-left: 50px">
-        <ul class="list-group list-group-flush">
-            <li th:text="${lease.carNumber}" class="list-group-item" style="background: #222222; color: white;">An item</li>
-            <li th:text="${lease.leaseName}" class="list-group-item" style="background: #222222; color: white;">A second item</li>
-            <li th:text="${lease.leaseDuration}" class="list-group-item" style="background: #222222; color: darkred; text-decoration: underline;">A third item</li>
-            <li class="list-group-item" style="background: #222222;">
-                <button class="btn btn-outline-danger">Gå til Lejeaftale</button>
-            </li>
-        </ul>
+<div style="margin-left: 300px">
+    <div th:each="lease : ${oldLease}" style="padding: 25px; display: inline-block;">
+        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase;">
+            <img src="https://cdn-icons-png.flaticon.com/512/197/197717.png" class="card-img-top"
+                 style="height: 80%; width: 80%; padding-left: 50px">
+            <ul class="list-group list-group-flush">
+                <li th:text="${lease.carNumber}" class="list-group-item" style="background: #222222; color: white;">An
+                    item
+                </li>
+                <li th:text="${lease.leaseName}" class="list-group-item" style="background: #222222; color: white;">A
+                    second item
+                </li>
+                <li th:text="${lease.leaseDuration}" class="list-group-item"
+                    style="background: #222222; color: darkred; text-decoration: underline;">A third item
+                </li>
+                <li class="list-group-item" style="background: #222222;">
+                    <button class="btn btn-outline-danger">Gå til Lejeaftale</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 

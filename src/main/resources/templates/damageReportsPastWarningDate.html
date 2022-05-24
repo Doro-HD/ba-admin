@@ -11,12 +11,15 @@
     </head>
     <body>
         <div th:replace="websiteLayout :: sidebar"></div>
+
+        <div style="margin-left: 300px">
         <div style="display: inline-block">
             <table>
                 <tr th:each="damageReport : ${damageReports}">
                     <td th:text="${damageReport.carNumber} + ' ' + ${damageReport.warningDate}"></td>
                 </tr>
             </table>
+        </div>
         </div>
     </body>
 </html>

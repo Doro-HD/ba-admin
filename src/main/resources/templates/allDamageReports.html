@@ -11,12 +11,15 @@
 </head>
 <body>
     <div th:replace="websiteLayout :: sidebar"></div>
+
+    <div style="margin-left: 300px">
     <div style="display: inline-block">
         <ul>
             <li th:each="damageReport : ${damageReports}">
                 <a th:href="@{/damageReport/{id}(id=${damageReport.id})}" th:text="${damageReport.carNumber}"></a>
             </li>
         </ul>
+    </div>
     </div>
 </body>
 </html>
