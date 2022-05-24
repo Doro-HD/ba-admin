@@ -41,6 +41,8 @@ public class DataRegistrationController {
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
                   model.addAttribute("currentSite", "carForm");
+
+                  model.addAttribute("car", new Car());
             }
 
             return endpoint;
