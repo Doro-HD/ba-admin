@@ -1,23 +1,38 @@
-<!-- Author: David -->
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-      <meta charset="UTF-8">
-      <title>Opret ny bil</title>
+<head th:insert="websiteLayout :: headContent">
+</head>
+<body>
+<link th:href="@{/leaseformcss.css}" href="/static/leaseformcss.css" rel="stylesheet">
+<!-- af David og Lasse -->
 
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  </head>
-  <body>
-    <div th:replace="websiteLayout :: sidebar"></div>
-    <div style="display: inline-block">
-      <form th:object="${car}" th:action="@{''}" method="post">
-        <label>Vogn nummer</label>
-        <input type="number">
+<div th:replace="websiteLayout :: sidebar"></div>
 
-        <label>Stel nummer</label>
-        <input type="text">
-      </form>
+
+<div style="margin-left: 300px">
+    <div class="contractform2" style="display: inline-block;">
+        <form th:object="${car}" method="post" th:action="@{''}">
+            <label class="form-label mt-10">Vogn Nummer</label>
+            <input type="text" th:field="*{carId}" name="setCarNumber" class="form-control">
+
+            <br>
+
+            <label class="form-label mt-10">Stelnummer</label>
+            <input type="text" th:field="*{chassisNumber}" name="setChassisNumber" class="form-control">
+
+            <br>
+
+            <button type="submit" onclick="clickAlert()" value="submit" class="btn btn-outline-primary mt-3 mb-3">Opret
+                Bil
+            </button>
+
+            <script>
+                function clickAlert() {
+                    alert("Bil Oprettet i Systemet!");
+                }
+            </script>
+        </form>
     </div>
-  </body>
+</div>
+</body>
 </html>

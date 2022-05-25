@@ -2,24 +2,19 @@
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Skadesrapporter overskredet advarsels periode</title>
+<head th:replace="websiteLayout :: headContent">
+</head>
+<body>
+<div th:replace="websiteLayout :: sidebar"></div>
 
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    </head>
-    <body>
-        <div th:replace="websiteLayout :: sidebar"></div>
-
-        <div style="margin-left: 300px">
-        <div style="display: inline-block">
-            <table>
-                <tr th:each="damageReport : ${damageReports}">
-                    <td th:text="${damageReport.carNumber} + ' ' + ${damageReport.warningDate}"></td>
-                </tr>
-            </table>
-        </div>
-        </div>
-    </body>
+<div style="margin-left: 300px">
+    <div style="display: inline-block">
+        <table>
+            <tr th:each="damageReport : ${damageReports}">
+                <td th:text="${damageReport.carNumber} + ' ' + ${damageReport.warningDate}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
 </html>
