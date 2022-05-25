@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 //Authors
 //David
-//
 @Controller
 public class LoginController {
 
