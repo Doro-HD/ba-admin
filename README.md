@@ -7,32 +7,34 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 ## Krav
 - Et sted hvor programmet kan hostes, f.eks. Heroku.
   - Host sitet skal kunne opgive enviorment variable til programmet.
-- En online mysql database med følgende tabeller.
-  - cars:
-    - car_number: int auto incremented
-    - chassis_number: varchar
-    - car_state: varchar
-  - damage_reports:
-    - id: int auto:  incremented
-    - total_cost: int
-    - car_number: foreign key int
-    - warning_date: date
-  - damages:
-    - id: int auto incremented
-    - damage_type: varchar
-    - price: int
-    - damage_report_id: foreign key int
-  - Leases
-    - id: auto incremented int
-    - lease_name: varchar
-    - monthly_payment
-    - car_number: foreign key int
-    - expiration_date: date
-  - users
-    - id: auto incremented int
-    - username: varchar
-    - user_password: varchar
-    - role: 
+- En online mysql database.
+  - Sql filen ba-admin-db-create-script.sql kan benyttes til at oprette databasen med de påkrævende tabeller.
+  - Alternativt er de tabeller programmet benytter beskrevet nedenunder.
+    - cars:
+      - car_number: int auto incremented
+      - chassis_number: varchar
+      - car_state: varchar
+    - damage_reports:
+      - id: int auto:  incremented
+      - total_cost: int
+      - car_number: foreign key int
+      - warning_date: date
+    - damages:
+      - id: int auto incremented
+      - damage_type: varchar
+      - price: int
+      - damage_report_id: foreign key int
+    - Leases
+      - id: auto incremented int
+      - lease_name: varchar
+      - monthly_payment
+      - car_number: foreign key int
+      - expiration_date: date
+    - users
+      - id: auto incremented int
+      - username: varchar
+      - user_password: varchar
+      - role: 
 
 ## Opsætning
 - Sæt en databasen op.
