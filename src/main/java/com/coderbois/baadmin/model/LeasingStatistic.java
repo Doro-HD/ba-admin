@@ -1,4 +1,4 @@
-package com.coderbois.baadmin.service;
+package com.coderbois.baadmin.model;
 
 import com.coderbois.baadmin.model.Lease;
 
