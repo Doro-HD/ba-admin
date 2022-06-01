@@ -8,7 +8,7 @@ Dette projekt kan hostes af hvem end der ønsker det, krav og opsættelse er bes
 - Et sted hvor programmet kan hostes, f.eks. Heroku.
   - Host sitet skal kunne opgive enviorment variable til programmet.
 - En online mysql database.
-  - Sql filen ba-admin-db-create-script.sql kan benyttes til at oprette databasen med de påkrævende tabeller.
+  - Sql filen ba-admin-db-create-script.sql kan benyttes til at oprette de påkrævende tabeller i jeres egen database.
   - Alternativt er de tabeller programmet benytter beskrevet nedenunder.
     - cars:
       - car_number: int auto incremented
