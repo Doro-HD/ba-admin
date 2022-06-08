@@ -180,6 +180,8 @@ public class DamageReportController implements RoleProtected {
         return endpoint;
     }
 
+    //Author
+    //David
     @Override
     public boolean hasCorrectRole(String userRole) {
         return userRole.equals(Roles.DAMAGE_REPORT.getName());

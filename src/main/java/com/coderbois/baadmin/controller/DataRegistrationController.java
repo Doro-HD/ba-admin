@@ -148,6 +148,8 @@ public class DataRegistrationController implements RoleProtected {
             return endpoint;
       }
 
+      //Author
+      //David
       @Override
       public boolean hasCorrectRole(String userRole) {
             return userRole.equals(Roles.DATA_REGISTRATION.getName());
