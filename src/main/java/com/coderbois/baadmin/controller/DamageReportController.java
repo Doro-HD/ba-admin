@@ -33,6 +33,7 @@ public class DamageReportController implements RoleProtected {
 
     //Authors
     //David
+
     @GetMapping("/createDamageReport")
     public String createDamageReportGet(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
@@ -59,8 +60,33 @@ public class DamageReportController implements RoleProtected {
     }
 
     //Author
-    //Troels
+    //David
     @PostMapping("/createDamageReport")
+    public String resolveCheckupCar(@ModelAttribute DamageReport damageReport, @RequestParam String action, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
+
+        Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUserName != null && userHasCorrectRole) {
+            endpoint = "redirect:/createDamageReport";
+
+            if (action.equals("available")) {
+                this.carService.updateCar(damageReport.getCarNumber(), CarState.AVAILABLE);
+            } else if (action.equals("damaged")) {
+                this.damageReportService.createDamageReport(damageReport);
+            }
+        }
+
+
+        return endpoint;
+    }
+
+    //Author
+    //Troels
+    //@PostMapping("/createDamageReport")
     public String createDamageReportPost(@ModelAttribute DamageReport damageReport, HttpSession httpSession) {
         String endpoint = "redirect:/login";
 
@@ -72,27 +98,6 @@ public class DamageReportController implements RoleProtected {
         if (cookieUserName != null && userHasCorrectRole) {
             endpoint = "redirect:/createDamageReport";
             this.damageReportService.createDamageReport(damageReport);
-        }
-
-
-        return endpoint;
-    }
-
-    //Author
-    //David
-    @PostMapping("/createDamageReport")
-    public String setCarAsAvailable(@ModelAttribute DamageReport damageReport, @RequestParam String action, HttpSession httpSession) {
-        String endpoint = "redirect:/login";
-
-        Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
-        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
-
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
-
-        if (cookieUserName != null && userHasCorrectRole) {
-            System.out.println(action);
-            //this.carService.updateCar(damageReport.getCarNumber(), CarState.AVAILABLE);
-            endpoint = "redirect:/createDamageReport";
         }
 
 
