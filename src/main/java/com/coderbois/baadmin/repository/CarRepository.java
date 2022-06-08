@@ -35,6 +35,9 @@ public class CarRepository {
                         int id = resultSet.getInt("car_number");
                         String chassisNumber = resultSet.getString("chassis_number");
                         String carStateString = resultSet.getString("car_state");
+                        String carBrandString = resultSet.getString("car_brand");
+                        String carModelString = resultSet.getString("car_model");
+                        int carYearInt = resultSet.getInt("car_year");
 
                         CarState carState;
 
@@ -53,6 +56,9 @@ public class CarRepository {
                         car.setCarId(id);
                         car.setChassisNumber(chassisNumber);
                         car.setCarState(carState);
+                        car.setCarBrand(carBrandString);
+                        car.setCarModel(carModelString);
+                        car.setCarYear(carYearInt);
 
                         allCars.add(car);
                   }
