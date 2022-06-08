@@ -1,6 +1,7 @@
 package com.coderbois.baadmin.controller;
 
 import com.coderbois.baadmin.model.Car;
+import com.coderbois.baadmin.model.CarState;
 import com.coderbois.baadmin.model.Lease;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
@@ -116,6 +117,7 @@ public class DataRegistrationController implements RoleProtected {
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "redirect:/leaseForm";
                   this.leaseService.saveLease(lease);
+                  this.carService.updateCar(lease.getCarNumber(), CarState.LEASED);
 
             }
 
