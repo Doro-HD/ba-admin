@@ -1,9 +1,7 @@
 package com.coderbois.baadmin.controller;
 
 import com.coderbois.baadmin.model.Car;
-import com.coderbois.baadmin.model.CarState;
 import com.coderbois.baadmin.model.Lease;
-import com.coderbois.baadmin.repository.CarRepository;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ import javax.servlet.http.HttpSession;
 //Lasse
 //Victor
 @Controller
-public class DataRegistrationController {
+public class DataRegistrationController implements RoleProtected {
 
       private final CarService carService;
       private final LeaseService leaseService;
@@ -38,11 +36,13 @@ public class DataRegistrationController {
       public String createCar(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "carForm";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
@@ -58,10 +58,21 @@ public class DataRegistrationController {
       //Author
       //David
       @PostMapping("createCar")
-      public String createCarPost(@ModelAttribute Car car) {
-            this.carService.createCar(car);
+      public String createCarPost(@ModelAttribute Car car, HttpSession httpSession) {
+            String endpoint = "redirect:/login";
 
-            return "redirect:/createCar";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
+                  endpoint = "redirect:/createCar";
+                  this.carService.createCar(car);
+
+            }
+
+            return endpoint;
       }
 
 
@@ -72,11 +83,13 @@ public class DataRegistrationController {
       public String createLease (HttpSession httpSession, Model model){
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "leaseForm";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
@@ -92,11 +105,22 @@ public class DataRegistrationController {
       //Author
       //Victor
       @PostMapping("/leaseForm")
-      public String createLeasePost (@ModelAttribute Lease lease){
-            this.leaseService.saveLease(lease);
-            this.carService.updateCar(lease.getCarNumber(), CarState.LEASED);
+      public String createLeasePost (@ModelAttribute Lease lease, HttpSession httpSession){
+            String endpoint = "redirect:/login";
 
-            return "redirect:/leaseForm";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
+                  endpoint = "redirect:/leaseForm";
+                  this.leaseService.saveLease(lease);
+
+            }
+
+
+            return endpoint;
       }
 
       //Authors
@@ -106,11 +130,13 @@ public class DataRegistrationController {
       public String showOldLeases (HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "oldLease";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
@@ -122,10 +148,10 @@ public class DataRegistrationController {
             return endpoint;
       }
 
-
-      @GetMapping("/test")
-      public void updateCar(){
-            CarRepository myRep = new CarRepository();
-            myRep.updateCar(51, CarState.AVAILABLE);
-            }
+      //Author
+      //David
+      @Override
+      public boolean hasCorrectRole(String userRole) {
+            return userRole.equals(Roles.DATA_REGISTRATION.getName());
       }
+}

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 //Troels
 //Victor
 @Controller
-public class DamageReportController {
+public class DamageReportController implements RoleProtected {
 
     private DamageReportService damageReportService;
     private CarService carService;
@@ -37,11 +37,13 @@ public class DamageReportController {
     public String createDamageReportGet(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        if (cookieUsername != null) {
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "createDamageReport";
 
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
@@ -59,10 +61,21 @@ public class DamageReportController {
     //Author
     //Troels
     @PostMapping("/createDamageReport")
-    public String createDamageReportPost(@ModelAttribute DamageReport damageReport) {
-        this.damageReportService.createDamageReport(damageReport);
+    public String createDamageReportPost(@ModelAttribute DamageReport damageReport, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
 
-        return "redirect:/createDamageReport";
+        Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUserName != null && userHasCorrectRole) {
+            endpoint = "redirect:/createDamageReport";
+            this.damageReportService.createDamageReport(damageReport);
+        }
+
+
+        return endpoint;
     }
 
     //Author
@@ -71,11 +84,13 @@ public class DamageReportController {
     public String getAllReports(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        if (cookieUsername != null) {
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "allDamageReports";
 
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
@@ -95,11 +110,13 @@ public class DamageReportController {
     public String damageReportGet(@PathVariable("id") int id, HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        if (cookieUsername != null) {
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "damageReport";
 
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
@@ -119,12 +136,24 @@ public class DamageReportController {
     //Author
     //David
     @PostMapping("/damageReport/{id}")
-    public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage, Model model) {
-        this.damageReportService.addDamageToDamageReport(id, damage);
+    public String createDamagePost(@PathVariable("id") int id, @ModelAttribute Damage damage, Model model, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
 
-        model.addAttribute("currentSite", "damageReport");
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        return "redirect:/damageReport/" + id;
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
+            endpoint = "redirect:/damageReport/" + id;
+            this.damageReportService.addDamageToDamageReport(id, damage);
+            model.addAttribute("currentSite", "damageReport");
+
+        }
+
+
+
+        return endpoint;
     }
 
     //Author
@@ -133,11 +162,13 @@ public class DamageReportController {
     public String damageReportsPastWarningDate(Model model, HttpSession httpSession) {
         String endpoint = "redirect:/login";
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        if (cookieUsername != null) {
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "damageReportsPastWarningDate";
 
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
@@ -147,5 +178,12 @@ public class DamageReportController {
         }
 
         return endpoint;
+    }
+
+    //Author
+    //David
+    @Override
+    public boolean hasCorrectRole(String userRole) {
+        return userRole.equals(Roles.DAMAGE_REPORT.getName());
     }
 }
