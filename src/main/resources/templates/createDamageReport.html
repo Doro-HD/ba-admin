@@ -8,13 +8,14 @@
 <div th:replace="websiteLayout :: sidebar"></div>
 
 <div style="margin-left: 300px">
-    <form method="post" th:object="${damageReport}" th:action="@{''}" style="display: inline-block">>
+    <form method="post" th:object="${damageReport}" th:action="@{/setCarAsAvailable/1}" style="display: inline-block">>
         <label>Biler der skal checkes</label>
         <select th:field="*{carNumber}">
             <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
         </select>
 
-        <button type="submit" value="submit" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
+        <button type="submit" value="submit" name="action" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
+        <button type="submit" value="available" name="action" class="btn btn-outline-dark mt-3 mb-3">Skades fri</button>
     </form>
 </div>
 </body>
