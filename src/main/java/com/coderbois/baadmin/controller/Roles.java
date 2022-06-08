@@ -1,5 +1,7 @@
 package com.coderbois.baadmin.controller;
 
+//Author for this entire enum
+//David
 public enum Roles {
     DATA_REGISTRATION ("dataRegistration"),
     DAMAGE_REPORT ("damageReport"),
