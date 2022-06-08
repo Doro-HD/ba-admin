@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 //Troels
 //Victor
 @Controller
-public class BusinessEngineeringController {
+public class BusinessEngineeringController implements RoleProtected{
       private final LeaseService leaseService;
       private final CarService carService;
 
@@ -35,11 +35,13 @@ public class BusinessEngineeringController {
       public String getBusinessStatistic(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "businessStats";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
@@ -78,11 +80,13 @@ public class BusinessEngineeringController {
       public String getCarsOnSpecificDate(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "searchDate";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
@@ -100,16 +104,22 @@ public class BusinessEngineeringController {
       //Victor
       @PostMapping("/searchDate")
       public String postCarsOnSpecificDate(@ModelAttribute Lease lease, HttpSession httpSession, Model model) {
-            model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
 
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            model.addAttribute("username", cookieUsername.getValue());
-            model.addAttribute("userRole", cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            if (cookieUsername != null && userHasCorrectRole) {
+                  model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
 
-            model.addAttribute("currentSite", "searchDate");
-            return "carByDate";
+                  model.addAttribute("currentSite", "searchDate");
+                  return "carByDate";
+            } else {
+                  return "redirect:/login";
+            }
+
       }
 
 
@@ -119,11 +129,13 @@ public class BusinessEngineeringController {
       public String checkWarehouse(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            if (cookieUsername != null) {
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "warehouse";
 
-                  Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
                   model.addAttribute("allCars", carService.getAllCars());
                   model.addAttribute("username", cookieUsername.getValue());
@@ -133,6 +145,11 @@ public class BusinessEngineeringController {
             }
 
             return endpoint;
+      }
+
+      @Override
+      public boolean hasCorrectRole(String userRole) {
+            return userRole.equals(Roles.BUSINESS_ENGINEERING.getName());
       }
 }
 
