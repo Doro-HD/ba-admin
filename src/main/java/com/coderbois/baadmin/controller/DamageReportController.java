@@ -65,7 +65,7 @@ public class DamageReportController implements RoleProtected {
         String endpoint = "redirect:/login";
 
         Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
-        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("userRole");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
         boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
 
@@ -140,7 +140,7 @@ public class DamageReportController implements RoleProtected {
         String endpoint = "redirect:/login";
 
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("userRole");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
         boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
 

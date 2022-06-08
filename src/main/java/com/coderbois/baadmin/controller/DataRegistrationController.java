@@ -62,7 +62,7 @@ public class DataRegistrationController implements RoleProtected {
             String endpoint = "redirect:/login";
 
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("userRole");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
 
@@ -109,7 +109,7 @@ public class DataRegistrationController implements RoleProtected {
             String endpoint = "redirect:/login";
 
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
-            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("userRole");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
             boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
 

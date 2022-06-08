@@ -27,10 +27,21 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String loginGet(Model model) {
-        model.addAttribute("user", new User());
+    public String loginGet(HttpSession httpSession, Model model) {
+        String endpoint = "login";
 
-        return "login";
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        if (cookieUsername != null && cookieUserRole != null) {
+            endpoint = "index";
+            model.addAttribute("currentSite", "dashBoard");
+            model.addAttribute("userRole", cookieUserRole.getValue());
+        } else {
+            model.addAttribute("user", new User());
+        }
+
+        return endpoint;
     }
 
     //Author
