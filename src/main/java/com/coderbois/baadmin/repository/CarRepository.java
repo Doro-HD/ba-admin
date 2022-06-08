@@ -88,4 +88,16 @@ public class CarRepository {
             }
       }
 
+      public void updateCar(int carId, CarState carState){
+            PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("UPDATE cars SET car_state = ? WHERE car_number = ?");
+            try {
+                  preparedStatement.setString(1, carState.getName());
+                  preparedStatement.setInt(2, carId);
+                  preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                  throw new RuntimeException(e);
+            }
+
+      }
+
 }

@@ -52,6 +52,10 @@ public class CarService {
             return cars;
       }
 
+      public void updateCar(int carId, CarState carState){
+            this.carRepository.updateCar(carId, carState);
+      }
+
 
 
 

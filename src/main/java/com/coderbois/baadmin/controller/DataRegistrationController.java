@@ -1,7 +1,9 @@
 package com.coderbois.baadmin.controller;
 
 import com.coderbois.baadmin.model.Car;
+import com.coderbois.baadmin.model.CarState;
 import com.coderbois.baadmin.model.Lease;
+import com.coderbois.baadmin.repository.CarRepository;
 import com.coderbois.baadmin.service.CarService;
 import com.coderbois.baadmin.service.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +94,7 @@ public class DataRegistrationController {
       @PostMapping("/leaseForm")
       public String createLeasePost (@ModelAttribute Lease lease){
             this.leaseService.saveLease(lease);
+            this.carService.updateCar(lease.getCarNumber(), CarState.LEASED);
 
             return "redirect:/leaseForm";
       }
@@ -118,4 +121,11 @@ public class DataRegistrationController {
 
             return endpoint;
       }
-}
+
+
+      @GetMapping("/test")
+      public void updateCar(){
+            CarRepository myRep = new CarRepository();
+            myRep.updateCar(51, CarState.AVAILABLE);
+            }
+      }
