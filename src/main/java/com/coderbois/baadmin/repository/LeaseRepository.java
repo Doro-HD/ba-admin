@@ -92,4 +92,14 @@ public class LeaseRepository {
 
         return leases;
     }
+
+    public void deleteLease(int leaseId){
+        PreparedStatement preparedStatement = this.jdbcConnector.getPreparedStatement("DELETE FROM leases WHERE id = ?");
+        try {
+            preparedStatement.setInt(1, leaseId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

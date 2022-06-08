@@ -59,6 +59,10 @@ public class LeaseService {
         return this.leaseRepository.getLeasesThatExpireByDate(lease.getStringDate());
     }
 
+    public void deleteLease(int leaseId){
+        this.leaseRepository.deleteLease(leaseId);
+    }
+
 }
 
 
