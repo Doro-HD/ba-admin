@@ -178,6 +178,9 @@ public class DamageReportController implements RoleProtected {
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "redirect:/allDamageReports";
 
+            DamageReport damageReport = this.damageReportService.findDamageReportById(damageReportId);
+
+            this.carService.updateCar(damageReport.getCarNumber(), CarState.AVAILABLE);
             this.damageReportService.deleteDamageReportById(damageReportId);
         }
 
