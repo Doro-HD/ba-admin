@@ -32,6 +32,9 @@
                     <button class="btn btn-outline-danger">Gå til Lejeaftale</button>
                 </li>
             </ul>
+            <form method="post" th:action="@{''}" style="background: #222222">
+                <button type="submit" name="action" th:value="${lease.getId}" class="btn btn-outline-danger">Slet Lejeaftale</button>
+            </form>
         </div>
     </div>
 </div>

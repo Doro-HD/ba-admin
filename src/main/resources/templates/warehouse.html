@@ -8,19 +8,27 @@
 <div th:replace="websiteLayout :: sidebar">
 </div>
 
-<div style="margin-left: 300px;">
+<div style="margin-left: 400px;">
     <div th:each="car : ${allCars}" style="padding: 25px; display: inline-block;">
-        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase;">
-            <img src="https://static.vecteezy.com/system/resources/previews/001/193/767/original/compact-car-png.png" class="card-img-top"
+        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase; border-radius: 20px">
+            <img src="https://static.vecteezy.com/system/resources/previews/001/193/767/original/compact-car-png.png"
+                 class="card-img-top"
                  style="height: 80%; width: 80%; padding-left: 50px">
             <ul class="list-group list-group-flush">
-                <li th:text="${car.carId}" class="list-group-item" style="background: #222222; color: white;">An item
+                <li th:text="${'Mærke: ' + car.carBrand}" class="list-group-item"
+                    style="background: #222222; color: white;">
                 </li>
-                <li th:text="${car.chassisNumber}" class="list-group-item" style="background: #222222; color: white;">A
-                    second item
+                <li th:text="${'model: ' + car.carModel}" class="list-group-item"
+                    style="background: #222222; color: white;">
                 </li>
-                <li th:text="${car.carState}" class="list-group-item"
-                    style="background: #222222; color: white; text-decoration: underline;">A third item
+                <li th:text="${'årgang: ' + car.carYear}" class="list-group-item"
+                    style="background: #222222; color: white;">
+                </li>
+                <li th:text="${'stelnummer: ' + car.chassisNumber}" class="list-group-item"
+                    style="background: #222222; color: white;">A
+                </li>
+                <li th:text="${'tilgængelighed: ' + car.carState}" class="list-group-item"
+                    style="background: #222222; color: white; text-decoration: underline;">
                 </li>
                 <li class="list-group-item" style="background: #222222;">
                     <button class="btn btn-outline-primary">Se Detaljer</button>

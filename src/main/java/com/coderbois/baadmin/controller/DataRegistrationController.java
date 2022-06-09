@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -143,6 +144,32 @@ public class DataRegistrationController implements RoleProtected {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
                   model.addAttribute("currentSite", "oldLease");
+
+
+                  model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
+                  for (Lease lease : leaseService.getLeasePastDueDate()) {
+                        System.out.println(lease.getCarNumber());
+                  }
+
+            }
+
+            return endpoint;
+      }
+
+      @PostMapping("/oldLease")
+      public String deleteOldLeases (HttpSession httpSession, Model model, @RequestParam int action) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
+                  endpoint = "oldLease";
+
+                  leaseService.deleteLease(action);
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
 
                   model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
             }
