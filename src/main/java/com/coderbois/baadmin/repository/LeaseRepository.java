@@ -103,7 +103,7 @@ public class LeaseRepository {
         }
     }
     public Lease getSingleLease(int leaseId){
-        String sql = "SELECT * FROM leases WHERE expiration_date =  \"" + leaseId + "\"";
+        String sql = "SELECT * FROM leases WHERE id =  \"" + leaseId + "\"";
         Lease myLease = null;
         try {
 
