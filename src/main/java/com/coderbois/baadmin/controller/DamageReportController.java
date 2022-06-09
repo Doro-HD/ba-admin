@@ -1,5 +1,6 @@
 package com.coderbois.baadmin.controller;
 
+import com.coderbois.baadmin.model.CarState;
 import com.coderbois.baadmin.model.Damage;
 import com.coderbois.baadmin.model.DamageReport;
 import com.coderbois.baadmin.service.CarService;
@@ -7,13 +8,12 @@ import com.coderbois.baadmin.service.DamageReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
 
 //Authors
 //David
@@ -59,9 +59,10 @@ public class DamageReportController implements RoleProtected {
     }
 
     //Author
+    //David
     //Troels
     @PostMapping("/createDamageReport")
-    public String createDamageReportPost(@ModelAttribute DamageReport damageReport, HttpSession httpSession) {
+    public String resolveCheckupCar(@ModelAttribute DamageReport damageReport, @RequestParam String action, HttpSession httpSession) {
         String endpoint = "redirect:/login";
 
         Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
@@ -71,9 +72,14 @@ public class DamageReportController implements RoleProtected {
 
         if (cookieUserName != null && userHasCorrectRole) {
             endpoint = "redirect:/createDamageReport";
-            this.damageReportService.createDamageReport(damageReport);
-        }
 
+            if (action.equals("available")) {
+                this.carService.updateCar(damageReport.getCarNumber(), CarState.AVAILABLE);
+            } else if (action.equals("damaged")) {
+                this.damageReportService.createDamageReport(damageReport);
+                this.carService.updateCar(damageReport.getCarNumber(), CarState.DAMAGED);
+            }
+        }
 
         return endpoint;
     }
@@ -152,6 +158,28 @@ public class DamageReportController implements RoleProtected {
         }
 
 
+
+        return endpoint;
+    }
+
+    //Author
+    //David
+    //RequestParam fundet på nedenstående link den 08/06/22
+    //https://stackoverflow.com/questions/8954426/spring-mvc-multiple-submit-button-to-a-form
+    @PostMapping("/resolveDamageReport")
+    public String resolveDamageReport(@RequestParam int damageReportId, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
+
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
+            endpoint = "redirect:/allDamageReports";
+
+            this.damageReportService.deleteDamageReportById(damageReportId);
+        }
 
         return endpoint;
     }

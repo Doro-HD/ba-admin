@@ -30,7 +30,7 @@ public class DamageReport {
         return this.warningDate.format(dateTimeFormatter);
     }
 
-    public ArrayList<Damage> getDamage() {
+    public ArrayList<Damage> getDamages() {
         return damages;
     }
     public void setDamage(ArrayList<Damage> damage) {

@@ -155,4 +155,28 @@ public class DamageReportRepository {
 
         return wasDamageAdded;
     }
+
+    //Author
+    //David
+    public void deleteDamageReportById(int damageReportId) {
+        final String DAMAGES_SQL = "DELETE FROM damages WHERE damage_report_id = ?";
+
+        PreparedStatement damagesPreparedStatement = this.jdbcConnector.getPreparedStatement(DAMAGES_SQL);
+
+        final String DAMAGE_REPORT_SQL = "DELETE FROM damage_reports WHERE id = ?";
+
+        PreparedStatement damageReportPreparedStatement = this.jdbcConnector.getPreparedStatement(DAMAGE_REPORT_SQL);
+
+        if (damagesPreparedStatement != null && damageReportPreparedStatement != null) {
+            try {
+                damagesPreparedStatement.setInt(1, damageReportId);
+                damagesPreparedStatement.executeUpdate();
+
+                damageReportPreparedStatement.setInt(1, damageReportId);
+                damageReportPreparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

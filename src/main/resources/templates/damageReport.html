@@ -17,6 +17,21 @@
 
         <button type="submit">Opret skade</button>
     </form>
+    <table>
+        <thead>
+            <th>Skade</th>
+            <th>Pris</th>
+        </thead>
+        <tbody>
+            <tr th:each="damage : ${damageReport.damages}">
+                <td th:text="${damage.damageType}"></td>
+                <td th:text="${damage.price} + .kr"></td>
+            </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/resolveDamageReport}" method="post">
+        <button type="submit" name="damageReportId" th:value="${damageReport.id}">Skade udbedrede</button>
+    </form>
 </div>
 </body>
 </html>
