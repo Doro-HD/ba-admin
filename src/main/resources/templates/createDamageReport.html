@@ -14,6 +14,8 @@
             <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
         </select>
 
+        <!-- requestParam fundet på linket nedenunder den 8/6/22 -->
+        <!-- https://stackoverflow.com/questions/8954426/spring-mvc-multiple-submit-button-to-a-form -->
         <button type="submit" value="damaged" name="action" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
         <button type="submit" value="available" name="action" class="btn btn-outline-dark mt-3 mb-3">Skades fri</button>
     </form>

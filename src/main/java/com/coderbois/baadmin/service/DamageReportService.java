@@ -6,7 +6,6 @@ import com.coderbois.baadmin.repository.DamageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -64,5 +63,11 @@ public class DamageReportService {
     //David
     public ArrayList<DamageReport> findDamageReportPastWarningDate() {
         return this.damageReportRepository.findDamageReportPastWarningDate(LocalDate.now().toString());
+    }
+
+    //Author
+    //David
+    public void deleteDamageReportById(int id) {
+        this.damageReportRepository.deleteDamageReportById(id);
     }
 }

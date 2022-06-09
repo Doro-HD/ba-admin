@@ -33,7 +33,6 @@ public class DamageReportController implements RoleProtected {
 
     //Authors
     //David
-
     @GetMapping("/createDamageReport")
     public String createDamageReportGet(HttpSession httpSession, Model model) {
         String endpoint = "redirect:/login";
@@ -61,6 +60,7 @@ public class DamageReportController implements RoleProtected {
 
     //Author
     //David
+    //Troels
     @PostMapping("/createDamageReport")
     public String resolveCheckupCar(@ModelAttribute DamageReport damageReport, @RequestParam String action, HttpSession httpSession) {
         String endpoint = "redirect:/login";
@@ -77,29 +77,9 @@ public class DamageReportController implements RoleProtected {
                 this.carService.updateCar(damageReport.getCarNumber(), CarState.AVAILABLE);
             } else if (action.equals("damaged")) {
                 this.damageReportService.createDamageReport(damageReport);
+                this.carService.updateCar(damageReport.getCarNumber(), CarState.DAMAGED);
             }
         }
-
-
-        return endpoint;
-    }
-
-    //Author
-    //Troels
-    //@PostMapping("/createDamageReport")
-    public String createDamageReportPost(@ModelAttribute DamageReport damageReport, HttpSession httpSession) {
-        String endpoint = "redirect:/login";
-
-        Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
-        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
-
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
-
-        if (cookieUserName != null && userHasCorrectRole) {
-            endpoint = "redirect:/createDamageReport";
-            this.damageReportService.createDamageReport(damageReport);
-        }
-
 
         return endpoint;
     }
@@ -178,6 +158,28 @@ public class DamageReportController implements RoleProtected {
         }
 
 
+
+        return endpoint;
+    }
+
+    //Author
+    //David
+    //RequestParam fundet på nedenstående link den 08/06/22
+    //https://stackoverflow.com/questions/8954426/spring-mvc-multiple-submit-button-to-a-form
+    @PostMapping("/resolveDamageReport")
+    public String resolveDamageReport(@RequestParam int damageReportId, HttpSession httpSession) {
+        String endpoint = "redirect:/login";
+
+        Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+        Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+
+        if (cookieUsername != null && userHasCorrectRole) {
+            endpoint = "redirect:/allDamageReports";
+
+            this.damageReportService.deleteDamageReportById(damageReportId);
+        }
 
         return endpoint;
     }
