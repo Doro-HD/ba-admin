@@ -102,4 +102,28 @@ public class LeaseRepository {
             throw new RuntimeException(e);
         }
     }
+    public Lease getSingleLease(int leaseId){
+        String sql = "SELECT * FROM leases WHERE expiration_date =  \"" + leaseId + "\"";
+        Lease myLease = null;
+        try {
+
+            ResultSet resultSet = this.jdbcConnector.getStatement().executeQuery(sql);
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String leaseName = resultSet.getString("lease_name");
+                double monthlyPay = resultSet.getDouble("monthly_payment");
+                int carNumber = resultSet.getInt("car_number");
+                String localDate = resultSet.getString("expiration_date");
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+                myLease = new Lease(id, leaseName, monthlyPay, carNumber, LocalDate.parse(localDate, formatter));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return myLease;
+    }
+
+
+
 }
