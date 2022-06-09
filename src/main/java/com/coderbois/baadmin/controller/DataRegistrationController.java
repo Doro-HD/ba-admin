@@ -147,10 +147,6 @@ public class DataRegistrationController implements RoleProtected {
 
 
                   model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
-                  for (Lease lease : leaseService.getLeasePastDueDate()) {
-                        System.out.println(lease.getCarNumber());
-                  }
-
             }
 
             return endpoint;
@@ -167,7 +163,10 @@ public class DataRegistrationController implements RoleProtected {
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "oldLease";
 
+                  carService.updateCar(this.leaseService.getSingleLease(action).getCarNumber(), CarState.CHECKUP);
                   leaseService.deleteLease(action);
+                  System.out.println(action);
+                  System.out.println(action);
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 

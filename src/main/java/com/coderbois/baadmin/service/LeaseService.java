@@ -63,6 +63,10 @@ public class LeaseService {
         this.leaseRepository.deleteLease(leaseId);
     }
 
+    public Lease getSingleLease(int leaseId){
+        return leaseRepository.getSingleLease(leaseId);
+    }
+
 }
 
 
