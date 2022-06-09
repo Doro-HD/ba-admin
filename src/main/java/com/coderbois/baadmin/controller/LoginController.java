@@ -53,7 +53,6 @@ public class LoginController {
         PasswordManager passwordManager = new PasswordManager();
 
         User user = this.userService.findUserByUsername(userAttemptingToLogin.getUsername());
-        System.out.println(user);
 
         if (user != null) {
             passwordIsCorrect = passwordManager.validatePassword(userAttemptingToLogin.getPassword(), user.getPassword());

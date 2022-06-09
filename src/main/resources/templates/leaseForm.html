@@ -12,21 +12,26 @@
 
 <div style="margin-left: 300px">
     <div class="contractform" style="display: inline-block;">
+
+        <h3 style="text-align: center">Opret Lejeaftale</h3>
+
+        <br>
+
         <form th:object="${lease}" method="post" th:action="@{/leaseForm}">
             <label class="form-label mt-10">Kunde Navn</label>
             <input type="text" th:field="*{leaseName}" name="createLeaseName" class="form-control">
 
             <br>
 
-            <label class="form-label mt-10">Månedlig betaling</label>
-            <input type="text" th:field="*{monthlyPay}" name="createMonthyPay" class="form-control">
+            <label class="form-label mt-10">Vælg Bil</label>
+            <select th:field="*{carNumber}">
+                <option th:value="${car.carId}" th:each="car : ${cars}" th:text="${car.carId + ' ' + car.carBrand + ' ' +   car.carModel + ' ' + car.carYear}"></option>
+            </select>
 
             <br>
 
-            <label class="form-label mt-10">Vælg Bil</label>
-            <select th:field="*{carNumber}">
-                <option th:value="${car.carId}" th:each="car : ${cars}" th:text="${car.carId}"></option>
-            </select>
+            <label class="form-label mt-10">Månedlig betaling</label>
+            <input type="text" th:field="*{monthlyPay}" name="createMonthyPay" class="form-control">
 
             <br>
 

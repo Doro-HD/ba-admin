@@ -11,9 +11,24 @@
 
 <div style="margin-left: 300px">
     <div class="contractform2" style="display: inline-block;">
+
+        <h3 style="text-align: center">Opret Bil</h3>
+
+        <br>
+
         <form th:object="${car}" method="post" th:action="@{''}">
-            <label class="form-label mt-10">Vogn Nummer</label>
-            <input type="text" th:field="*{carId}" name="setCarNumber" class="form-control">
+            <label class="form-label mt-10">Mærke</label>
+            <input type="text" th:field="*{carBrand}" name="setCarBrand" class="form-control">
+
+            <br>
+
+            <label class="form-label mt-10">Model</label>
+            <input type="text" th:field="*{carModel}" name="setCarModel" class="form-control">
+
+            <br>
+
+            <label class="form-label mt-10">Årgang</label>
+            <input type="text" th:field="*{carYear}" name="setCarYear" class="form-control">
 
             <br>
 
