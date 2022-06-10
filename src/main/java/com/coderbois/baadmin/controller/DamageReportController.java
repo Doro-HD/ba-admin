@@ -50,7 +50,7 @@ public class DamageReportController {
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
 
-            model.addAttribute("currentSite", "createDamageReport");
+            model.addAttribute("currentSite", SidebarHighLighter.CREATE_DAMAGE_REPORT);
 
             model.addAttribute("damageReport", new DamageReport());
             model.addAttribute("checkUpCars", this.carService.getCheckUpCars());
@@ -103,7 +103,7 @@ public class DamageReportController {
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
 
-            model.addAttribute("currentSite", "allDamageReports");
+            model.addAttribute("currentSite", SidebarHighLighter.ALL_DAMAGE_REPORTS);
 
             model.addAttribute("damageReports", this.damageReportService.getAllDamageReports());
         }
@@ -131,7 +131,7 @@ public class DamageReportController {
 
             DamageReport damageReport = this.damageReportService.findDamageReportById(id);
 
-            model.addAttribute("currentSite", "allDamageReports");
+            model.addAttribute("currentSite", SidebarHighLighter.ALL_DAMAGE_REPORTS);
 
             model.addAttribute("damageReport", damageReport);
             model.addAttribute("damage", new Damage());
@@ -155,8 +155,6 @@ public class DamageReportController {
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "redirect:/damageReport/" + id;
             this.damageReportService.addDamageToDamageReport(id, damage);
-            model.addAttribute("currentSite", "damageReport");
-
         }
 
 
@@ -206,7 +204,7 @@ public class DamageReportController {
             model.addAttribute("username", cookieUsername.getValue());
             model.addAttribute("userRole", cookieUserRole.getValue());
 
-            model.addAttribute("currentSite", "damageReportPastWarningDate");
+            model.addAttribute("currentSite", SidebarHighLighter.DAMAGE_REPORTS_PAST_WARNING_DATE);
             model.addAttribute("damageReports", this.damageReportService.findDamageReportPastWarningDate());
         }
 

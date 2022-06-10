@@ -51,7 +51,7 @@ public class DataRegistrationController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "carForm");
+                  model.addAttribute("currentSite", SidebarHighLighter.CAR_FORM);
 
                   model.addAttribute("car", new Car());
             }
@@ -98,7 +98,7 @@ public class DataRegistrationController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "leaseForm");
+                  model.addAttribute("currentSite", SidebarHighLighter.LEASE_FORM);
                   model.addAttribute("lease", new Lease());
                   model.addAttribute("cars", carService.getAvailableCars());
             }
@@ -145,7 +145,7 @@ public class DataRegistrationController {
 
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
-                  model.addAttribute("currentSite", "oldLease");
+                  model.addAttribute("currentSite", SidebarHighLighter.OLD_LEASE);
 
 
                   model.addAttribute("oldLease", leaseService.getLeasePastDueDate());
@@ -167,8 +167,6 @@ public class DataRegistrationController {
 
                   carService.updateCar(this.leaseService.getSingleLease(action).getCarNumber(), CarState.CHECKUP);
                   leaseService.deleteLease(action);
-                  System.out.println(action);
-                  System.out.println(action);
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 

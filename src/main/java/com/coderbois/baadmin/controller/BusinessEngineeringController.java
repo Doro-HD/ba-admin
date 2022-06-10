@@ -48,7 +48,7 @@ public class BusinessEngineeringController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "businessStats");
+                  model.addAttribute("currentSite", SidebarHighLighter.BUSINESS_STATS);
                   model.addAttribute("leasestatistic", this.leaseService.calculateBusinessInfo());
             }
 
@@ -69,7 +69,7 @@ public class BusinessEngineeringController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "dashBoard");
+                  model.addAttribute("currentSite", SidebarHighLighter.DASH_BOARD);
             }
 
 
@@ -93,7 +93,7 @@ public class BusinessEngineeringController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "searchDate");
+                  model.addAttribute("currentSite", SidebarHighLighter.SEARCH_DATE);
 
                   model.addAttribute("lease", new Lease());
             }
@@ -116,7 +116,7 @@ public class BusinessEngineeringController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "searchDate");
+                  model.addAttribute("currentSite", SidebarHighLighter.SEARCH_DATE);
                   return "carByDate";
             } else {
                   return "redirect:/login";
@@ -143,7 +143,7 @@ public class BusinessEngineeringController {
                   model.addAttribute("username", cookieUsername.getValue());
                   model.addAttribute("userRole", cookieUserRole.getValue());
 
-                  model.addAttribute("currentSite", "checkWarehouse");
+                  model.addAttribute("currentSite", SidebarHighLighter.CHECK_WAREHOUSE);
             }
 
             return endpoint;
