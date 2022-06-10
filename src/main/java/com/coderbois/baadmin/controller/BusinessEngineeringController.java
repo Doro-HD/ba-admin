@@ -19,13 +19,15 @@ import javax.servlet.http.HttpSession;
 //Troels
 //Victor
 @Controller
-public class BusinessEngineeringController implements RoleProtected{
+public class BusinessEngineeringController {
       private final LeaseService leaseService;
       private final CarService carService;
+      private RoleProtected roleProtected;
 
       public BusinessEngineeringController(LeaseService leaseService, CarService carService) {
             this.leaseService = leaseService;
             this.carService = carService;
+            this.roleProtected = new RoleProtected(Roles.BUSINESS_ENGINEERING.getName());
       }
 
       //Authors
@@ -37,7 +39,7 @@ public class BusinessEngineeringController implements RoleProtected{
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "businessStats";
@@ -82,7 +84,7 @@ public class BusinessEngineeringController implements RoleProtected{
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "searchDate";
@@ -108,7 +110,7 @@ public class BusinessEngineeringController implements RoleProtected{
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
             if (cookieUsername != null && userHasCorrectRole) {
                   model.addAttribute("leases", this.leaseService.getLeasesThatExpireByDate(lease));
                   model.addAttribute("username", cookieUsername.getValue());
@@ -131,7 +133,7 @@ public class BusinessEngineeringController implements RoleProtected{
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "warehouse";
@@ -145,13 +147,6 @@ public class BusinessEngineeringController implements RoleProtected{
             }
 
             return endpoint;
-      }
-
-      //Author
-      //David
-      @Override
-      public boolean hasCorrectRole(String userRole) {
-            return userRole.equals(Roles.BUSINESS_ENGINEERING.getName());
       }
 }
 

@@ -20,15 +20,17 @@ import java.util.Iterator;
 //Troels
 //Victor
 @Controller
-public class DamageReportController implements RoleProtected {
+public class DamageReportController {
 
     private DamageReportService damageReportService;
     private CarService carService;
+    private RoleProtected roleProtected;
 
     @Autowired
     public DamageReportController(DamageReportService damageReportService, CarService carService) {
         this.damageReportService = damageReportService;
         this.carService = carService;
+        this.roleProtected = new RoleProtected(Roles.DAMAGE_REPORT.getName());
     }
 
     //Authors
@@ -39,7 +41,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "createDamageReport";
@@ -68,7 +70,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUserName = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUserName != null && userHasCorrectRole) {
             endpoint = "redirect:/createDamageReport";
@@ -92,7 +94,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "allDamageReports";
@@ -118,7 +120,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "damageReport";
@@ -148,7 +150,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "redirect:/damageReport/" + id;
@@ -173,7 +175,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "redirect:/allDamageReports";
@@ -195,7 +197,7 @@ public class DamageReportController implements RoleProtected {
         Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
         Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-        boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+        boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
         if (cookieUsername != null && userHasCorrectRole) {
             endpoint = "damageReportsPastWarningDate";
@@ -209,12 +211,5 @@ public class DamageReportController implements RoleProtected {
         }
 
         return endpoint;
-    }
-
-    //Author
-    //David
-    @Override
-    public boolean hasCorrectRole(String userRole) {
-        return userRole.equals(Roles.DAMAGE_REPORT.getName());
     }
 }

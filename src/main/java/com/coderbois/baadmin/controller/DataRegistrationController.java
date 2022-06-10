@@ -21,15 +21,17 @@ import javax.servlet.http.HttpSession;
 //Lasse
 //Victor
 @Controller
-public class DataRegistrationController implements RoleProtected {
+public class DataRegistrationController {
 
       private final CarService carService;
       private final LeaseService leaseService;
+      private RoleProtected roleProtected;
 
       @Autowired
       public DataRegistrationController(CarService carService, LeaseService leaseService){
             this.carService = carService;
             this.leaseService = leaseService;
+            this.roleProtected = new RoleProtected(Roles.DATA_REGISTRATION.getName());
       }
 
       //Author
@@ -40,7 +42,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "carForm";
@@ -66,7 +68,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "redirect:/createCar";
@@ -87,7 +89,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "leaseForm";
@@ -113,7 +115,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "redirect:/leaseForm";
@@ -135,7 +137,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "oldLease";
@@ -162,7 +164,7 @@ public class DataRegistrationController implements RoleProtected {
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
 
-            boolean userHasCorrectRole = this.hasCorrectRole(cookieUserRole.getValue());
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
                   endpoint = "oldLease";
@@ -175,12 +177,5 @@ public class DataRegistrationController implements RoleProtected {
             }
 
             return endpoint;
-      }
-
-      //Author
-      //David
-      @Override
-      public boolean hasCorrectRole(String userRole) {
-            return userRole.equals(Roles.DATA_REGISTRATION.getName());
       }
 }
