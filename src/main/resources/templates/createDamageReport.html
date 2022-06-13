@@ -5,21 +5,31 @@
 <head th:replace="websiteLayout :: headContent(title=('Opret Skadesrapport'))">
 </head>
 <body>
+<link rel="stylesheet" href="/static/damageReport.css" th:href="@{/damageReport.css}">
+
 <div th:replace="websiteLayout :: sidebar"></div>
 
 <div style="margin-left: 300px">
-    <form th:if="${!checkUpCars.isEmpty}" method="post" th:object="${damageReport}" th:action="@{''}" style="display: inline-block">
-        <label>Biler der skal checkes</label>
+
+    <form th:if="${!checkUpCars.isEmpty}" class="contractform" method="post" th:object="${damageReport}" th:action="@{''}" style="display: inline-block">
+
+        <h3>Bil Eftersyn</h3>
+
+        <br>
+
         <select th:field="*{carNumber}">
-            <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId}"></option>
+            <option th:value="${car.carId}" th:each="car : ${checkUpCars}" th:text="${car.carId + ' ' + car.carBrand + ' ' + car.carModel + ' ' + car.carYear}"></option>
         </select>
+
+        <br>
 
         <!-- requestParam fundet på linket nedenunder den 8/6/22 -->
         <!-- https://stackoverflow.com/questions/8954426/spring-mvc-multiple-submit-button-to-a-form -->
-        <button type="submit" value="damaged" name="action" class="btn btn-outline-dark mt-3 mb-3">Opret Skades Rapport</button>
-        <button type="submit" value="available" name="action" class="btn btn-outline-dark mt-3 mb-3">Skades fri</button>
+        <button type="submit" value="damaged" name="action" class="btn btn-outline-primary mt-3 mb-3">Opret Skades Rapport</button>
+        <button type="submit" value="available" name="action" class="btn btn-outline-primary mt-3 mb-3">Skades fri</button>
     </form>
-    <h1 th:unless="${!checkUpCars.isEmpty}">Ingen biler til checkup</h1>
+    <h1 th:unless="${!checkUpCars.isEmpty}" class="noLeaseWarning">Ingen biler til checkup</h1>
 </div>
+
 </body>
 </html>

@@ -5,3 +5,17 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.sideTitle {
+    padding-top: 12px;
+    text-align: center;
+    margin-left: 150px;
+    text-transform: uppercase;
+    text-shadow:
+            -1px -1px 0 #222222,
+            1px -1px 0 #222222,
+            -1px 1px 0 #222222,
+            1px 1px 0 #222222;
+    color: white;
+}
+

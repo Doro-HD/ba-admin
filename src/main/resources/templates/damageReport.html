@@ -7,7 +7,7 @@
 <body>
 <div th:replace="websiteLayout :: sidebar"></div>
 
-<div style="margin-left: 300px">
+<div style="margin-left: 400px">
     <form th:object="${damage}" th:action="${''}" method="post" style="display: inline-block">>
         <label>Skade type</label>
         <input th:field="*{damageType}" type="text">
