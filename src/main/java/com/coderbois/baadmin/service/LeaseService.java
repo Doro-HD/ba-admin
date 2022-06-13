@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 //Author
 //Troels
@@ -53,6 +55,15 @@ public class LeaseService {
             }
         }
         return ourOldLeases;
+    }
+
+
+
+
+    public ArrayList<Lease> getLeaseSortedByDate(){
+        ArrayList<Lease> ourLeases = this.leaseRepository.getAllLeases();
+        Collections.sort(ourLeases);
+        return ourLeases;
     }
 
     public ArrayList<Lease> getLeasesThatExpireByDate(Lease lease){

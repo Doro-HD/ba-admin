@@ -5,7 +5,7 @@ import java.time.LocalDate;
 //Author
 //Lasse
 //Victor
-public class Lease {
+public class Lease implements Comparable<Lease>{
     private int id;
 
     private String leaseName;
@@ -102,4 +102,13 @@ public class Lease {
     public void setLocalDate(String localDate) {
         this.localDate = localDate;
     }
+
+    @Override
+    public int compareTo(Lease o) {
+        if (this.getLeaseDuration() == null || o.getLeaseDuration() == null)
+            return 0;
+        return this.getLeaseDuration().compareTo(o.getLeaseDuration());
+    }
+
 }
+
