@@ -8,7 +8,12 @@
 <div th:replace="websiteLayout :: sidebar">
 </div>
 
-<div style="margin-left: 400px;">
+<div class="sideTitle">
+    <h2 >Lager Bestand</h2>
+</div>
+<hr>
+
+<div style="margin-left: 408px;">
     <div th:each="car : ${allCars}" style="padding: 25px; display: inline-block;">
         <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase; border-radius: 20px">
             <img src="https://static.vecteezy.com/system/resources/previews/001/193/767/original/compact-car-png.png"
@@ -30,7 +35,7 @@
                 <li th:text="${'tilgængelighed: ' + car.carState}" class="list-group-item"
                     style="background: #222222; color: white; text-decoration: underline;">
                 </li>
-                <li class="list-group-item" style="background: #222222;">
+                <li class="list-group-item" style="background: #222222; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
                     <button class="btn btn-outline-primary">Se Detaljer</button>
                 </li>
             </ul>

@@ -7,6 +7,7 @@ public enum SidebarHighLighter {
     CAR_FORM,
     LEASE_FORM,
     OLD_LEASE,
+    ACTIVE_LEASE,
     BUSINESS_STATS,
     CHECK_WAREHOUSE,
     SEARCH_DATE,

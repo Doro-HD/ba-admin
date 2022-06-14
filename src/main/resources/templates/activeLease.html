@@ -1,26 +1,22 @@
-<!-- Author: Lasse -->
-
 <!DOCTYPE html>
-<html lang="en " xmlns:th="http://www.thymeleaf.org">
-<head th:replace="websiteLayout :: headContent(title=('Overskredet Lejeaftaler'))">
+<html lang="en">
+<head th:insert="websiteLayout :: headContent(title=('aktive Lejeaftaler'))">
 </head>
 <body>
 <link rel="stylesheet" href="/static/oldLease.css" th:href="@{/oldLease.css}">
-
-<!-- af lasse -->
 
 <div th:replace="websiteLayout :: sidebar">
 
 </div>
 
 <div class="sideTitle">
-    <h2 >Overskredet Lejeaftaler</h2>
+    <h2 >Aktive Lejeaftaler</h2>
 </div>
 <hr>
 
 
 <div style="margin-left: 408px">
-    <div th:each="lease : ${oldLease}" style="padding: 25px; display: inline-block">
+    <div th:each="lease : ${activeLease}" style="padding: 25px; display: inline-block">
         <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase; border-radius: 20px">
             <img src="https://cdn-icons-png.flaticon.com/512/197/197717.png" class="card-img-top"
                  style="height: 80%; width: 80%; padding-left: 50px">
@@ -32,20 +28,20 @@
                     second item
                 </li>
                 <li th:text="${lease.leaseDuration}" class="list-group-item"
-                    style="background: #222222; color: darkred; text-decoration: underline;">A third item
+                    style="background: #222222; color: white; text-decoration: underline;">A third item
                 </li>
                 <li class="list-group-item" style="background: #222222;">
                     <button class="btn btn-outline-primary">Gå til Lejeaftale</button>
                 </li>
                 <li class="list-group-item" style="background: #222222; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px" >
-                <form method="post" th:action="@{''}">
-                    <button type="submit" name="action" th:value="${lease.getId}" class="btn btn-outline-danger">Slet Lejeaftale</button>
-                </form>
+                    <form method="post" th:action="@{''}">
+                        <button type="submit" name="action" th:value="${lease.getId}" class="btn btn-outline-danger">Slet Lejeaftale</button>
+                    </form>
                 </li>
             </ul>
         </div>
     </div>
-    <h1 th:unless="${!oldLease.isEmpty}" class="noLeaseWarning">Ingen Overskredet Lejeaftaler</h1>
+    <h1 th:unless="${!activeLease.isEmpty}" class="noLeaseWarning">Ingen Overskredet Lejeaftaler</h1>
 </div>
 
 </body>

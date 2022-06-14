@@ -154,8 +154,8 @@ public class DataRegistrationController {
             return endpoint;
       }
 
-      @PostMapping("/oldLease")
-      public String deleteOldLeases (HttpSession httpSession, Model model, @RequestParam int action) {
+      @GetMapping("/activeLease")
+      public String showActiveLease(HttpSession httpSession, Model model) {
             String endpoint = "redirect:/login";
             Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
             Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
@@ -163,7 +163,30 @@ public class DataRegistrationController {
             boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
 
             if (cookieUsername != null && userHasCorrectRole) {
-                  endpoint = "oldLease";
+                  endpoint = "activeLease";
+
+
+                  model.addAttribute("username", cookieUsername.getValue());
+                  model.addAttribute("userRole", cookieUserRole.getValue());
+                  model.addAttribute("currentSite", SidebarHighLighter.ACTIVE_LEASE);
+
+
+                  model.addAttribute("activeLease", leaseService.getLeaseSortedByDate());
+            }
+
+            return endpoint;
+      }
+
+      @PostMapping("/activeLease")
+      public String deleteActiveLeases (HttpSession httpSession, Model model, @RequestParam int action) {
+            String endpoint = "redirect:/login";
+            Cookie cookieUsername = (Cookie) httpSession.getAttribute("username");
+            Cookie cookieUserRole = (Cookie) httpSession.getAttribute("role");
+
+            boolean userHasCorrectRole = this.roleProtected.hasCorrectRole(cookieUserRole.getValue());
+
+            if (cookieUsername != null && userHasCorrectRole) {
+                  endpoint = "activeLease";
 
                   carService.updateCar(this.leaseService.getSingleLease(action).getCarNumber(), CarState.CHECKUP);
                   leaseService.deleteLease(action);
@@ -175,4 +198,5 @@ public class DataRegistrationController {
 
             return endpoint;
       }
+
 }
