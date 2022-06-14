@@ -104,7 +104,7 @@ public class Lease implements Comparable<Lease>{
     }
 
     @Override
-    public int compareTo(Lease o) {
+    public int compareTo(Lease o) { // Taget fra hjemmesiden geeksforgeeks.org
         if (this.getLeaseDuration() == null || o.getLeaseDuration() == null)
             return 0;
         return this.getLeaseDuration().compareTo(o.getLeaseDuration());
