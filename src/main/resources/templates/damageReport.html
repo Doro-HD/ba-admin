@@ -5,33 +5,66 @@
 <head th:replace="websiteLayout :: headContent(title=('Skadesrapporter'))">
 </head>
 <body>
+<link th:href="@{/leaseformcss.css}" href="/static/leaseformcss.css" rel="stylesheet">
 <div th:replace="websiteLayout :: sidebar"></div>
 
-<div style="margin-left: 400px">
-    <form th:object="${damage}" th:action="${''}" method="post" style="display: inline-block">>
-        <label>Skade type</label>
-        <input th:field="*{damageType}" type="text">
+<div class="sideTitle">
+    <h2 >Opret Skader</h2>
+</div>
+<hr>
 
-        <label>Skadens pris</label>
-        <input th:field="*{price}" type="number">
+<div style="margin-left: 300px">
+    <div class="contractform3" style="display: inline-block;">
 
-        <button type="submit">Opret skade</button>
-    </form>
-    <table>
+        <h3 style="text-align: center">Opret Lejeaftale</h3>
+
+        <br>
+
+        <form th:object="${damage}" method="post" th:action="${''}">
+            <label class="form-label mt-10">Skadens Type</label>
+            <input type="text" th:field="*{damageType}" class="form-control">
+
+            <br>
+
+            <label class="form-label mt-10">Skadens Pris</label>
+            <input type="number" th:field="*{price}" class="form-control">
+
+            <br>
+
+            <button type="submit" onclick="clickAlert()" value="submit" class="btn btn-outline-primary mt-3 mb-3">Opret
+                Skade
+            </button>
+
+            <script>
+                function clickAlert() {
+                    alert("Skade Oprettet!");
+                }
+            </script>
+        </form>
+    </div>
+</div>
+
+
+<div style="padding-top: 650px; padding-left: 150px" class="container">
+    <table class="table table-dark" style="text-align: center">
         <thead>
-            <th>Skade</th>
-            <th>Pris</th>
+        <tr>
+            <th scope="col">Skade</th>
+            <th scope="col">Pris</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="damage : ${damageReport.damages}">
-                <td th:text="${damage.damageType}"></td>
-                <td th:text="${damage.price} + .kr"></td>
-            </tr>
+        <tr th:each="damage: ${damageReport.damages}">
+            <td th:text="${damage.damageType}"></td>
+            <td th:text="${damage.price + 'kr'}"></td>
+        </tr>
         </tbody>
     </table>
-    <form th:action="@{/resolveDamageReport}" method="post">
-        <button type="submit" name="damageReportId" th:value="${damageReport.id}">Skade udbedrede</button>
+
+    <form th:action="@{/resolveDamageReport}" method="post" style="text-align: center">
+        <button type="submit" name="damageReportId" th:value="${damageReport.id}" class="btn btn-outline-dark mt-3 mb-3">Skader udbedret</button>
     </form>
 </div>
+
 </body>
 </html>

@@ -5,15 +5,30 @@
 <head th:replace="websiteLayout :: headContent(title=('Find Lejeaftale På Dato'))">
 </head>
 <body>
-
+<link th:href="@{/leaseformcss.css}" href="/static/leaseformcss.css" rel="stylesheet">
 <div th:replace="websiteLayout :: sidebar">
 </div>
 
+
+
+<div class="sideTitle">
+    <h2 >Lejeaftaler ud fra dato</h2>
+</div>
+<hr>
+
 <div style="margin-left: 300px">
-    <div class="contractform" style="display: inline-block;">
+    <div class="contractform4" style="display: inline-block;">
+
+        <h3 style="text-align: center">Opret Lejeaftale</h3>
+
+        <br>
+
         <form th:object="${lease}" method="post" th:action="@{/searchDate}">
-            <label class="form-label mt-10">Indtast dato i format yyyy-mm-d</label>
-            <input type="text" th:field="*{stringDate}" name="createStringDate" class="form-control">
+            <label class="form-label mt-10">Indtast dato i format yyyy-mm-dd</label>
+            <input type="text" th:field="*{stringDate}" class="form-control">
+
+            <br>
+
             <button type="submit" value="submit" class="btn btn-outline-primary mt-3 mb-3">Søg</button>
         </form>
     </div>

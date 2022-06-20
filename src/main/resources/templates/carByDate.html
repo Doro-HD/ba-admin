@@ -5,13 +5,13 @@
 <head th:replace="websiteLayout :: headContent(title=('Køretøjer For Dato'))">
 </head>
 <body>
-
+<link rel="stylesheet" href="/static/oldLease.css" th:href="@{/oldLease.css}">
 <div th:replace="websiteLayout :: sidebar">
 </div>
 
-<div style="margin-left: 300px">
+<div style="margin-left: 408px">
     <div th:each="lease : ${leases}" style="padding: 25px; display: inline-block;">
-        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase;">
+        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase; border-radius: 20px">
             <img src="https://cdn-icons-png.flaticon.com/512/197/197717.png" class="card-img-top"
                  style="height: 80%; width: 80%; padding-left: 50px">
             <ul class="list-group list-group-flush">
@@ -24,8 +24,8 @@
                 <li th:text="${lease.leaseDuration}" class="list-group-item"
                     style="background: #222222; color: white; text-decoration: underline;">A third item
                 </li>
-                <li class="list-group-item" style="background: #222222;">
-                    <button class="btn btn-outline-danger">Gå til Lejeaftale</button>
+                <li class="list-group-item" style="background: #222222; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px">
+                    <button class="btn btn-outline-Primary">Se Detaljer</button>
                 </li>
             </ul>
         </div>

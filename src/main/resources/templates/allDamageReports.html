@@ -4,16 +4,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="websiteLayout :: headContent(title=('Alle Skadesrapporter'))">
 <body>
+<link rel="stylesheet" href="/static/oldLease.css" th:href="@{/oldLease.css}">
+
 <div th:replace="websiteLayout :: sidebar"></div>
 
-<div style="margin-left: 300px">
-    <div style="display: inline-block">
-        <ul>
-            <li th:each="damageReport : ${damageReports}">
-                <a th:href="@{/damageReport/{id}(id=${damageReport.id})}" th:text="${damageReport.carNumber}"></a>
-            </li>
-        </ul>
+<div class="sideTitle">
+    <h2 >Alle Skaderapporter</h2>
+</div>
+<hr>
+
+<div style="margin-left: 408px;">
+    <div th:each="damageReport : ${damageReports}" style="padding: 25px; display: inline-block;">
+        <div class="card" style="width: 18rem; text-align: center; text-transform: uppercase; border-radius: 20px">
+            <img src="https://icons.veryicon.com/png/o/internet--web/collection-and-payment/damage.png"
+                 class="card-img-top"
+                 style="height: 80%; width: 80%; padding-left: 50px">
+            <ul class="list-group list-group-flush">
+                <li th:text="${'Rapport Id: ' + damageReport.id}" class="list-group-item" style="background: #222222; color: white;">
+                </li>
+                <li th:text="${'Vogn nummer: ' + damageReport.carNumber}" class="list-group-item" style="background: #222222; color: white;">
+                </li>
+                <li class="list-group-item" style="background: #222222; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+                    <a th:href="@{/damageReport/{id}(id=${damageReport.id})}"><button class="btn btn-outline-primary">Se skader</button></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
+
 </body>
 </html>
